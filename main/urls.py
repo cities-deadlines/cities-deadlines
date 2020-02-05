@@ -1,5 +1,5 @@
 """
-Backend URL Configuration.
+URL Configuration for main project.
 """
 
 from django.contrib import admin
