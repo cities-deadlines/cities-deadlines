@@ -1,7 +1,5 @@
 venv/
-<<<<<<< HEAD
 .vscode
 frontend/node_modules
-=======
-.vscode/
->>>>>>> c17ae17a20362a8718b83a75f99e4dc9dd504e1b
+__pycache__/
+
