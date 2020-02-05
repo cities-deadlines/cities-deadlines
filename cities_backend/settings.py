@@ -16,9 +16,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'leads.apps.LeadsConfig',
     'rest_framework',
-    'frontend', #enable the react frontend app
+    'leads.apps.LeadsConfig',
+    'frontend.apps.FrontendConfig', #enable the react frontend app
 ]
 
 MIDDLEWARE = [
