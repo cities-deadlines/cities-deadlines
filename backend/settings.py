@@ -1,5 +1,5 @@
 """
-Django settings for cities_backend project.
+Django settings for backend project.
 """
 
 import os
@@ -17,8 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'leads.apps.LeadsConfig',
-    'frontend.apps.FrontendConfig', #enable the react frontend app
+    'leads.apps.LeadsConfig', # connect leads app 
+    'frontend.apps.FrontendConfig', # connect react frontend app
 ]
 
 MIDDLEWARE = [
@@ -31,7 +31,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'cities_backend.urls'
+ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
     {
@@ -49,7 +49,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'cities_backend.wsgi.application'
+WSGI_APPLICATION = 'backend.wsgi.application'
 
 # database 
 
