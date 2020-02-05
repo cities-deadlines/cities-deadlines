@@ -6,8 +6,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('leads.urls')),
-    path('', include('frontend.urls')),
-    path('user/', include('user.urls'))
+    path('', include('frontend.urls')), # frontend urls (default)
+    path('admin/', admin.site.urls), # admin urls
+    path('user/', include('user.urls')) # user urls
 ]

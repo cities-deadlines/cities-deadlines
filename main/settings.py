@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'leads.apps.LeadsConfig', # connect leads app 
+    
     'frontend.apps.FrontendConfig', # connect react frontend app
     'user.apps.UserConfig', # connect user api app
 ]
