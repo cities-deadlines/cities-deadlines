@@ -1,0 +1,26 @@
+/* Module base styles */
+
+#module-container {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#left-module {
+    position: absolute;
+
+    left: 0px;
+    width: 70%;
+    height: 100%;
+}
+
+#right-module {
+    position: absolute;
+
+    right: 0px;
+    width: 30%;
+    height: 100%;
+}

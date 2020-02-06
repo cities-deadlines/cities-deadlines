@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 import SessionContext from './session'
+import './styles.css'
 
 class App extends Component {
     constructor(props) {
@@ -21,6 +22,8 @@ class App extends Component {
     }
 
     render() {
+
+        // create session value
         const value = {
             user: this.state.user,
             updateUser: this.updateUser
@@ -28,11 +31,17 @@ class App extends Component {
 
         return (
             <SessionContext.Provider value={value}>
-                <div id='left-module'>
+                <div id='module-container'>
+                    
+                    {/* left module container */}
+                    <div id='left-module'>
 
-                </div>
+                    </div>
 
-                <div id='right-module'>
+                    {/* right module container */}
+                    <div id='right-module'>
+
+                    </div>
 
                 </div>
             </SessionContext.Provider>
