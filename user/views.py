@@ -1,10 +1,21 @@
-from django.http import HttpResponse
-import datetime
+from django.shortcuts import render
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.contrib.auth import get_user_model
 
-def login(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
+from . import models
+from . import serializers
 
+@api_view(['POST'])
 def register(request):
+    raise NotImplementedError
+
+@api_view(['GET'])
+def login(request):
+    user = get_user_model().objects.all()[0]
+    serialized = serializers.UserSerializer(user)
+    return Response(serialized.data)
+
+@api_view(['GET'])
+def signout(request):
     raise NotImplementedError
