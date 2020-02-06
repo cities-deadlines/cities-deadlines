@@ -1,41 +1,41 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+
+import SessionContext from './session'
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            email: '',
-            password: ''
-        };
+            user: null
+        }
+
+        // bind context updater
+        this.updateUser = this.updateUser.bind(this);
     }
 
-    componentDidMount() {
-        fetch('user/login', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.setState({
-                username: data.username,
-                email: data.email,
-                password: data.password
-            });
+    updateUser(user) {
+        this.setState({
+            user: user
         });
     }
 
     render() {
+        const value = {
+            user: this.state.user,
+            updateUser: this.updateUser
+        }
+
         return (
-            <>
-                <div>Username: {this.state.username}</div>
-                <div>Email: {this.state.email}</div>
-                <div>Password: {this.state.password}</div>
-            </>
+            <SessionContext.Provider value={value}>
+                <div id='left-module'>
+
+                </div>
+
+                <div id='right-module'>
+
+                </div>
+            </SessionContext.Provider>
         );
     }
 }
