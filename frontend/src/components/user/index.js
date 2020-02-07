@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import LoginModule from './login'
-import RegisterModule from './register'
+import LoginModule from './login';
+import RegisterModule from './register';
 
 class UserModule extends Component {
     constructor(props) {
@@ -11,18 +11,13 @@ class UserModule extends Component {
     render() {
         return (
             <div style={{
-                display: 'flex',
-                flexDirection: 'column',
                 height: '100%',
-
-                justifyContent: 'center',
-                alignItems: 'center',
-
-                backgroundColor: '#add8e6'
+                width: '100%'
             }}>
+                
+                <RegisterModule />
 
-                <LoginModule />
-
+                {/* <LoginModule id='login-module' /> */}
             </div>
         );
     } 

@@ -7,7 +7,16 @@ class LoginModule extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+
+                justifyContent: 'center',
+                alignItems: 'center',
+
+                backgroundColor: '#add8e6'
+            }}> 
                 Login Module
             </div>
         );
