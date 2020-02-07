@@ -13,10 +13,10 @@ class LeftModuleContainer extends Component {
     }
 }
 
-class LeftModuleTemplate extends Component {
+class LeftModule extends Component {
     constructor(props) {
         super(props);
     }
 }
 
-export { LeftModuleTemplate, LeftModuleContainer };
+export { LeftModule, LeftModuleContainer };

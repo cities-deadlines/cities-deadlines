@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 
-class RightModuleContainer extends Component {
+class RightModule extends Component {
     render() {
         return (
             <div style={{
+                position: 'relative',
                 height: '100%',
                 width: '100%'
             }}>
@@ -14,22 +14,15 @@ class RightModuleContainer extends Component {
     }
 }
 
-class RightModuleTemplate extends Component {
+class RightModulePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            visible: true
+            visible: props.visible
         }
-        this.toggleModule = this.toggleModule.bind(this);
     }
 
-    componentDidMount() {
-        setTimeout(() => {
-            this.toggleModule();
-        }, 3000)
-    }
-
-    toggleModule() {
+    toggleModulePage() {
         this.setState({
             visible: !this.state.visible
         });
@@ -38,25 +31,29 @@ class RightModuleTemplate extends Component {
     render() {
         return (
             <div style={{
+                position: 'absolute',
                 display: 'flex',
                 flexDirection: 'column',
                 height: '100%',
+                width: '100%',
 
                 justifyContent: 'center',
                 alignItems: 'center',
 
                 backgroundColor: '#add8e6',
+                
+                borderLeftColor: 'black',
+                borderLeftWidth: '1px',
+                borderLeftStyle: 'solid',
 
                 /* sliding animation */
                 transform: `translate(${this.state.visible ? 0 : 100}%, 0)`,
-                transition: 'transform 1s'
+                transition: 'transform 0.5s'
             }}> 
-
-                Right Module Template
-
+                {this.props.children}
             </div>
         );
     }
 }
 
-export { RightModuleTemplate, RightModuleContainer };
+export { RightModulePage, RightModule };

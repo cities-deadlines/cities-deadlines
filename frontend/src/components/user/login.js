@@ -1,26 +1,20 @@
 import React, { Component } from "react";
 
-class LoginModule extends Component {
+class LoginForm extends Component {
     constructor(props) {
         super(props);
+
+        // set functions from parents
+        this.switchPage = this.props.switchPage;
     }
 
     render() {
         return (
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100%',
-
-                justifyContent: 'center',
-                alignItems: 'center',
-
-                backgroundColor: '#add8e6'
-            }}> 
+            <div> 
                 Login Module
             </div>
         );
     }
 }
 
-export default LoginModule;
+export default LoginForm;
