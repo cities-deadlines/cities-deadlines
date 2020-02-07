@@ -33,7 +33,7 @@ class App extends Component {
             <SessionContext.Provider value={value}>
 
                 {/* module container (page) */}
-                <div id='module-container' style={{
+                <div style={{
                     position: 'absolute',
                     top: '0',
                     left: '0',
@@ -42,17 +42,19 @@ class App extends Component {
                 }}>
                     
                     {/* left module container */}
-                    <div id='left-module-container' style={{
+                    <div style={{
                         position: 'absolute',
                         left: '0',
                         width: '70%',
                         height: '100%'
                     }}>
 
+                        
+
                     </div>
 
                     {/* right module container */}
-                    <div id='right-module-container' style={{
+                    <div style={{
                         position: 'absolute',
                         right: '0',
                         width: '30%',

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 import LoginModule from './login';
 import RegisterModule from './register';
+import { 
+    RightModuleTemplate, 
+    RightModuleContainer 
+} from '../modules/right-module';
 
 class UserModule extends Component {
     constructor(props) {
@@ -10,15 +14,13 @@ class UserModule extends Component {
 
     render() {
         return (
-            <div style={{
-                height: '100%',
-                width: '100%'
-            }}>
-                
-                <RegisterModule />
+            <RightModuleContainer>
+
+                <RightModuleTemplate />
 
                 {/* <LoginModule id='login-module' /> */}
-            </div>
+                
+            </RightModuleContainer>
         );
     } 
 }
