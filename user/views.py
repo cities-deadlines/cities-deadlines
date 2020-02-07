@@ -12,6 +12,7 @@ def register(request):
 
 @api_view(['GET'])
 def login(request):
+    print(request.user.is_authenticated())
     user = get_user_model().objects.all()[0]
     serialized = serializers.UserSerializer(user)
     return Response(serialized.data)

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import SessionContext from './session'
+import UserModule from './user'
 import './styles.css'
 
 class App extends Component {
@@ -40,7 +42,7 @@ class App extends Component {
 
                     {/* right module container */}
                     <div id='right-module'>
-
+                        <UserModule/>
                     </div>
 
                 </div>
