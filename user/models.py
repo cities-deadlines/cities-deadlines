@@ -8,6 +8,8 @@ class User(AbstractBaseUser):
 
     # base fields
     id = models.AutoField(primary_key=True)
+
+    # change these to be the right field
     username = models.CharField(max_length=15)
     email = models.CharField(max_length=64)
     password = models.CharField(max_length=64)
