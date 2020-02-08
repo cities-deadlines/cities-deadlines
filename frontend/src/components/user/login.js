@@ -24,10 +24,14 @@ class LoginForm extends Component {
                         >
                             Username
                         </Form.Label>
-                        <Form.Control type='email' placeholder='Username' />
+                        <Form.Control type='username' placeholder='Username' />
                     </Form.Group>
 
-                    <Form.Group>
+                    <Form.Group 
+                        style={{
+                            marginTop: '-5px'
+                        }}
+                    >
                         <Form.Label 
                             style={{
                                 fontWeight: 'bold',
@@ -47,7 +51,7 @@ class LoginForm extends Component {
                         <Button
                             
                             variant='dark' 
-                            type='submit'
+                            type='button'
                             size="sm"
                             style={{
                                 width: '100%',
@@ -62,7 +66,9 @@ class LoginForm extends Component {
                     <Form.Group>
                         <Button
                             variant='dark' 
-                            type='submit'
+                            type='button'
+                        
+                            onClick={this.switchPage}
                             size="sm"
                             style={{
                                 width: '100%',
