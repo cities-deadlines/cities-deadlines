@@ -19,6 +19,7 @@ class LoginForm extends Component {
         // bind external functions
         this.updateUsername = this.updateUsername.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
@@ -26,7 +27,7 @@ class LoginForm extends Component {
         return (
             <>
                 <Form style={{
-                    width: '65%'
+                    width: '60%'
                 }}>
                     <Form.Group>
                         <Form.Label 
@@ -46,8 +47,9 @@ class LoginForm extends Component {
                             maxLength={15}
                             value={this.state.username}
                             onChange={this.updateUsername}
+                            onKeyPress={this.handleKeyPress}
                         />
-                        <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '16px' }}>
                             Invalid username.
                         </Form.Control.Feedback>
                     </Form.Group>
@@ -71,8 +73,9 @@ class LoginForm extends Component {
                             maxLength={64}
                             value={this.state.password}
                             onChange={this.updatePassword}
+                            onKeyPress={this.handleKeyPress}
                         />
-                        <Form.Control.Feedback type='invalid' style={{ fontSize: '12px' }}>
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '16px' }}>
                             Invalid password.
                         </Form.Control.Feedback>
                     </Form.Group>
@@ -112,6 +115,12 @@ class LoginForm extends Component {
                 </Form>
             </>
         );
+    }
+
+    handleKeyPress(event) {
+        if (event.key == 'Enter') {
+            this.submitForm();
+        }
     }
 
     submitForm() {
