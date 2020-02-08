@@ -1,22 +1,71 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib import auth
 
 from . import models
 from . import serializers
 
-@api_view(['POST'])
+@api_view(['GET'])
 def register(request):
-    raise NotImplementedError
+
+    try:
+
+        # fetch user data
+        email = request.headers['email']
+        username = request.headers['username']
+        password = request.headers['password']
+
+        # create user in manager
+        user = auth.get_user_model().objects.create_user(
+            email=email, 
+            username=username,
+            password=password
+        )
+
+        # login user
+        if user is not None:
+            auth.login(request, user)
+            return Response(True)
+        else: return Response(False)
+
+    except: 
+        return Response(False)
 
 @api_view(['GET'])
 def login(request):
-    print(request.user.is_authenticated())
-    user = get_user_model().objects.all()[0]
-    serialized = serializers.UserSerializer(user)
-    return Response(serialized.data)
 
+    try:
+
+        # fetch user data
+        username = request.headers['username']
+        password = request.headers['password']
+
+        # authenticate user
+        user = auth.authenticate(
+            username=username, 
+            password=password
+        )
+
+        # login user
+        if user is not None:
+            auth.login(request, user)
+            return Response(True)
+        else: return Response(False)
+
+    except: 
+        return Response(False)
+
+@login_required
 @api_view(['GET'])
 def signout(request):
-    raise NotImplementedError
+
+    try:
+
+        # logout user
+        auth.logout(request)
+        return Response(True)
+
+    except:
+        return Response(False)

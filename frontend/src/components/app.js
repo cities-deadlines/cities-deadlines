@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import UserModule from './user';
@@ -39,7 +40,9 @@ class App extends Component {
                     top: '0',
                     left: '0',
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    overflow: 'hidden',
+                    fontFamily: 'Arial, Helvetica, sans-serif'
                 }}>
                     
                     {/* left module frame */}

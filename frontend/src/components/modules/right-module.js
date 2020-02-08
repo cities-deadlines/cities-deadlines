@@ -40,7 +40,7 @@ class RightModulePage extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
 
-                backgroundColor: '#add8e6',
+                backgroundColor: '#e6e6e6',
                 
                 borderLeftColor: 'black',
                 borderLeftWidth: '1px',
