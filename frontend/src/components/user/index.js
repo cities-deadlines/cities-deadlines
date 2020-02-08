@@ -43,7 +43,13 @@ class UserModule extends Component {
 
                     backgroundColor: 'black'
                 }}> 
-                    <h4 style={{ color: 'white' }}>
+                    <h4 
+                        style={{ 
+                            color: 'white',
+                            marginTop: '2%',
+                            fontWeight: 'bolder'
+                        }}
+                    >
                         {(this.state.currentPage == 'login') ? 'Login' : 'Register'}
                     </h4>
                 </div>

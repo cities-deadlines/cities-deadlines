@@ -4,9 +4,18 @@ import { Form, Button } from 'react-bootstrap';
 class LoginForm extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            username: '',
+            password: '',
+            buttonDisabled: true
+        }
 
         // set functions from parents
         this.switchPage = this.props.switchPage;
+
+        // bind external functions
+        this.updateUsername = this.updateUsername.bind(this);
+        this.updatePassword = this.updatePassword.bind(this);
     }
 
     render() {
@@ -19,12 +28,19 @@ class LoginForm extends Component {
                         <Form.Label 
                             style={{
                                 fontWeight: 'bold',
-                                fontSize: '16px'
+                                fontSize: '15px'
                             }}
                         >
                             Username
                         </Form.Label>
-                        <Form.Control type='username' placeholder='Username' />
+                        <Form.Control 
+                            type='username' 
+                            placeholder='Username' 
+
+                            maxLength={15}
+                            value={this.state.username}
+                            onChange={this.updateUsername}
+                        />
                     </Form.Group>
 
                     <Form.Group 
@@ -35,7 +51,7 @@ class LoginForm extends Component {
                         <Form.Label 
                             style={{
                                 fontWeight: 'bold',
-                                fontSize: '16px'
+                                fontSize: '15px'
                             }}
                         >
                             Password
@@ -44,12 +60,15 @@ class LoginForm extends Component {
                             type='password' 
                             placeholder='Password' 
                             autoComplete='off'
+
+                            maxLength={64}
+                            value={this.state.password}
+                            onChange={this.updatePassword}
                         />
                     </Form.Group>
                     
                     <Form.Group>
                         <Button
-                            
                             variant='dark' 
                             type='button'
                             size="sm"
@@ -67,13 +86,13 @@ class LoginForm extends Component {
                         <Button
                             variant='dark' 
                             type='button'
-                        
-                            onClick={this.switchPage}
                             size="sm"
                             style={{
                                 width: '100%',
                                 fontWeight: 'bold'
                             }}
+
+                            onClick={this.switchPage}
                         >
                             Register
                         </Button>
@@ -81,6 +100,23 @@ class LoginForm extends Component {
                 </Form>
             </>
         );
+    }
+
+    updateUsername(event) {
+        const username = event.target.value;
+        if (username.length < 3 || username.match(/^[a-z0-9_-]{3,15}$/i)) {
+            this.setState({
+                username: username
+            });
+        }
+    }
+
+    updatePassword(event) {
+        if (event.target.value.match(/^[a-z0-9_-]{3,15}$/i)) {
+            this.setState({
+                password: event.target.value
+            });
+        }
     }
 }
 

@@ -19,7 +19,7 @@ class RegisterForm extends Component {
                         <Form.Label 
                             style={{
                                 fontWeight: 'bold',
-                                fontSize: '16px'
+                                fontSize: '15px'
                             }}
                         >
                             Email
@@ -27,15 +27,11 @@ class RegisterForm extends Component {
                         <Form.Control type='email' placeholder='Email' />
                     </Form.Group>
 
-                    <Form.Group
-                        style={{
-                            marginTop: '-5px'
-                        }}
-                    >
+                    <Form.Group>
                         <Form.Label 
                             style={{
                                 fontWeight: 'bold',
-                                fontSize: '16px'
+                                fontSize: '15px'
                             }}
                         >
                             Username
@@ -43,15 +39,11 @@ class RegisterForm extends Component {
                         <Form.Control type='username' placeholder='Username' />
                     </Form.Group>
 
-                    <Form.Group
-                        style={{
-                            marginTop: '-5px'
-                        }}
-                    >
+                    <Form.Group>
                         <Form.Label 
                             style={{
                                 fontWeight: 'bold',
-                                fontSize: '16px'
+                                fontSize: '15px'
                             }}
                         >
                             Password
