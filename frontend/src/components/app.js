@@ -49,7 +49,7 @@ class App extends Component {
                     <div id='left-module-frame' style={{
                         position: 'absolute',
                         left: '0',
-                        width: '70%',
+                        width: '75%',
                         height: '100%'
                     }}>
 
@@ -61,7 +61,7 @@ class App extends Component {
                     <div id='right-module-frame' style={{
                         position: 'absolute',
                         right: '0',
-                        width: '30%',
+                        width: '25%',
                         height: '100%'
                     }}>
 
