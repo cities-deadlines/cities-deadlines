@@ -128,7 +128,16 @@ class LoginForm extends Component {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
+                if (!data) {
+                    this.setState({
+                        username: '',
+                        password: '',
+                        validUsername: false,
+                        invalidUsername: true,
+                        validPassword: false,
+                        invalidPassword: true
+                    });
+                }
             });
         }
     }
