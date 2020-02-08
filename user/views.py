@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
 from . import models
@@ -9,45 +10,62 @@ from . import serializers
 @api_view(['GET'])
 def register(request):
 
-    # fetch user data
-    email = request.headers['email']
-    username = request.headers['username']
-    password = request.headers['password']
+    try:
 
-    # create user in manager
-    user = auth.get_user_model().objects.create_user(
-        email=email, 
-        username=username,
-        password=password
-    )
+        # fetch user data
+        email = request.headers['email']
+        username = request.headers['username']
+        password = request.headers['password']
 
-    # login user
-    if user is not None:
-        auth.login(request, user)
-        return Response(True)
-    else: return Response(False)
+        # create user in manager
+        user = auth.get_user_model().objects.create_user(
+            email=email, 
+            username=username,
+            password=password
+        )
+
+        # login user
+        if user is not None:
+            auth.login(request, user)
+            return Response(True)
+        else: return Response(False)
+
+    except: 
+        return Response(False)
 
 @api_view(['GET'])
 def login(request):
 
-    print(request.user.is_authenticated)
+    try:
 
-    # fetch user data
-    username = request.headers['username']
-    password = request.headers['password']
+        # fetch user data
+        username = request.headers['username']
+        password = request.headers['password']
 
-    # authenticate user
-    user = auth.authenticate(
-        username=username, 
-        password=password
-    )
+        # authenticate user
+        user = auth.authenticate(
+            username=username, 
+            password=password
+        )
 
-    # login user
-    if user is not None:
-        auth.login(request, user)
-        return Response(True)
-    else: return Response(False)
+        # login user
+        if user is not None:
+            auth.login(request, user)
+            return Response(True)
+        else: return Response(False)
 
+    except: 
+        return Response(False)
+
+@login_required
 @api_view(['GET'])
 def signout(request):
-    auth.logout(request)
+
+    try:
+
+        # logout user
+        auth.logout(request)
+        return Response(True)
+
+    except:
+        return Response(False)

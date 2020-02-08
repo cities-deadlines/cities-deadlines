@@ -27,20 +27,14 @@ class LoginForm extends Component {
         return (
             <>
                 <Form style={{
-                    width: '60%'
+                    width: '60%',
+                    marginTop: '150px'
                 }}>
                     <Form.Group>
-                        <Form.Label 
-                            style={{
-                                fontWeight: 'bold',
-                                fontSize: '15px'
-                            }}
-                        >
-                            Username
-                        </Form.Label>
                         <Form.Control
                             type='username' 
                             placeholder='Username' 
+                            style={{ borderRadius: '1rem' }}
                             isValid={this.state.validUsername}
                             isInvalid={this.state.invalidUsername}
 
@@ -49,23 +43,17 @@ class LoginForm extends Component {
                             onChange={this.updateUsername}
                             onKeyPress={this.handleKeyPress}
                         />
-                        <Form.Control.Feedback type='invalid' style={{ fontSize: '16px' }}>
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
                             Invalid username.
                         </Form.Control.Feedback>
                     </Form.Group>
 
+                    
                     <Form.Group>
-                        <Form.Label 
-                            style={{
-                                fontWeight: 'bold',
-                                fontSize: '15px'
-                            }}
-                        >
-                            Password
-                        </Form.Label>
                         <Form.Control 
                             type='password' 
                             placeholder='Password' 
+                            style={{ borderRadius: '1rem' }}
                             autoComplete='off'
                             isValid={this.state.validPassword}
                             isInvalid={this.state.invalidPassword}
@@ -75,36 +63,37 @@ class LoginForm extends Component {
                             onChange={this.updatePassword}
                             onKeyPress={this.handleKeyPress}
                         />
-                        <Form.Control.Feedback type='invalid' style={{ fontSize: '16px' }}>
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
                             Invalid password.
                         </Form.Control.Feedback>
                     </Form.Group>
                     
-                    <Form.Group>
+                    <Form.Group style={{ marginTop: '35px' }}>
                         <Button
                             variant='dark' 
                             type='button'
-                            size="sm"
                             style={{
-                                width: '100%',
-                                marginTop: '30px',
-                                fontWeight: 'bold'
+                                borderRadius: '1rem',
+                                fontWeight: 'bold',
+                                float: 'left',
+                                fontSize: '14px',
+                                width: '100px'
                             }}
 
                             onClick={this.submitForm}
                         >
                             Submit
                         </Button>
-                    </Form.Group>
 
-                    <Form.Group>
                         <Button
                             variant='dark' 
                             type='button'
-                            size="sm"
                             style={{
-                                width: '100%',
-                                fontWeight: 'bold'
+                                borderRadius: '1rem',
+                                fontWeight: 'bold',
+                                float: 'right',
+                                fontSize: '14px',
+                                width: '100px'
                             }}
 
                             onClick={this.switchPage}

@@ -65,7 +65,8 @@ class UserModule extends Component {
                         src={LogoIcon} 
                         alt={'Webiste Logo'} 
                         style={{
-                            marginTop: '-25%',
+                            position: 'absolute',
+                            top: '12%',
                             width: '450px'
                         }}
                     />
@@ -87,8 +88,8 @@ class UserModule extends Component {
                         src={LogoIcon} 
                         alt={'Webiste Logo'} 
                         style={{
-                            marginTop: '-25%',
-                            marginBottom: '-5%',
+                            position: 'absolute',
+                            top: '12%',
                             width: '450px'
                         }}
                     />
