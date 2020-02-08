@@ -72,7 +72,7 @@ class User(AbstractBaseUser):
     password = models.CharField(_('password'), max_length=64)
 
     # user metadata fields (automated)
-    userId = models.AutoField(primary_key=True, unique=True)
+    id = models.AutoField(primary_key=True, unique=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     isActive = models.BooleanField(default=True)
 

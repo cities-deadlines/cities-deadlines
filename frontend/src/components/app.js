@@ -3,8 +3,10 @@ import { render } from 'react-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import UserContext from './user/context';
 import UserModule from './user';
 import MapModule from './map';
+import HomeModule from './home';
 
 class App extends Component {
     constructor(props) {
@@ -15,24 +17,36 @@ class App extends Component {
 
         // bind context updater
         this.updateUser = this.updateUser.bind(this);
+        this.GET = this.GET.bind(this);
+        this.POST = this.POST.bind(this);
     }
 
-    updateUser(user) {
-        this.setState({
-            user: user
-        });
+    componentDidMount() {
+
+        // fetch current user
+        this.GET('user/current/', {})
+        .then((data) => {
+            this.updateUser({
+                id: data.id,
+                username: data.username,
+                email: data.email
+            });
+        })
+        .catch((err) => {});
     }
 
     render() {
 
-        // create session value
-        const value = {
+        // create user context value
+        const context = {
             user: this.state.user,
-            updateUser: this.updateUser
+            updateUser: this.updateUser,
+            GET: this.GET,
+            POST: this.POST
         }
 
         return (
-            <SessionContext.Provider value={value}>
+            <UserContext.Provider value={context}>
 
                 {/* module frame (page) */}
                 <div id='module-frame' style={{
@@ -65,20 +79,59 @@ class App extends Component {
                         height: '100%'
                     }}>
 
-                        <UserModule />
+                        {this.state.user ? (
+                            <HomeModule />
+                        ) : (
+                            <UserModule />
+                        )}
 
                     </div>
-
                 </div>
-            </SessionContext.Provider>
+            </UserContext.Provider>
         );
     }
-}
 
-// app session context
-const SessionContext = React.createContext({
-    user: null
-});
+    GET(route, headers) {
+        return fetch(route, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                ...headers
+            }
+        })
+        .then((res) => {
+            if (res.status == 401) {
+                this.updateUser(null);
+                throw Error();
+            }
+            return res.json();
+        });
+    }
+
+    POST(route, headers, body) {
+        return fetch(route, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...headers
+            },
+            body: body
+        })
+        .then((res) => {
+            if (res.status == 401) {
+                this.updateUser(null);
+                throw Error();
+            }
+            return res.json();
+        });
+    }
+
+    updateUser(user) {
+        this.setState({
+            user: user
+        });
+    }
+}
 
 export default App;
 render(<App />, document.getElementById("app"));

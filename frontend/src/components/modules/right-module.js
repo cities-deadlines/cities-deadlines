@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import UserContext from '../user/context';
+
 class RightModule extends Component {
     render() {
         return (
@@ -50,7 +52,13 @@ class RightModulePage extends Component {
                 transform: `translate(${this.state.visible ? 0 : 100}%, 0)`,
                 transition: 'transform 0.5s'
             }}> 
-                {this.props.children}
+                <UserContext.Consumer>
+                    {value => {
+                        return React.Children.map(this.props.children, child => {
+                            return React.cloneElement(child, { context: value });
+                        });
+                    }}
+                </UserContext.Consumer>
             </div>
         );
     }

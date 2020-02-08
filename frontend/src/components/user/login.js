@@ -13,9 +13,6 @@ class LoginForm extends Component {
             invalidPassword: false
         }
 
-        // set functions from parents
-        this.switchPage = this.props.switchPage;
-
         // bind external functions
         this.updateUsername = this.updateUsername.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
@@ -25,84 +22,81 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <>
-                <Form style={{
-                    width: '60%',
-                    marginTop: '150px'
-                }}>
-                    <Form.Group>
-                        <Form.Control
-                            type='username' 
-                            placeholder='Username' 
-                            style={{ borderRadius: '1rem' }}
-                            isValid={this.state.validUsername}
-                            isInvalid={this.state.invalidUsername}
+            <Form style={{
+                width: '60%',
+                marginTop: '150px'
+            }}>
+                <Form.Group>
+                    <Form.Control
+                        type='username' 
+                        placeholder='Username' 
+                        style={{ borderRadius: '1rem', borderColor: 'grey' }}
+                        isValid={this.state.validUsername}
+                        isInvalid={this.state.invalidUsername}
 
-                            maxLength={15}
-                            value={this.state.username}
-                            onChange={this.updateUsername}
-                            onKeyPress={this.handleKeyPress}
-                        />
-                        <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
-                            Invalid username.
-                        </Form.Control.Feedback>
-                    </Form.Group>
+                        maxLength={15}
+                        value={this.state.username}
+                        onChange={this.updateUsername}
+                        onKeyPress={this.handleKeyPress}
+                    />
+                    <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
+                        Invalid username.
+                    </Form.Control.Feedback>
+                </Form.Group>
+                
+                <Form.Group>
+                    <Form.Control 
+                        type='password' 
+                        placeholder='Password' 
+                        style={{ borderRadius: '1rem', borderColor: 'grey' }}
+                        autoComplete='off'
+                        isValid={this.state.validPassword}
+                        isInvalid={this.state.invalidPassword}
 
-                    
-                    <Form.Group>
-                        <Form.Control 
-                            type='password' 
-                            placeholder='Password' 
-                            style={{ borderRadius: '1rem' }}
-                            autoComplete='off'
-                            isValid={this.state.validPassword}
-                            isInvalid={this.state.invalidPassword}
+                        maxLength={64}
+                        value={this.state.password}
+                        onChange={this.updatePassword}
+                        onKeyPress={this.handleKeyPress}
+                    />
+                    <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
+                        Invalid password.
+                    </Form.Control.Feedback>
+                </Form.Group>
+                
+                <Form.Group style={{ marginTop: '35px' }}>
+                    <Button
+                        variant='dark' 
+                        type='button'
+                        style={{
+                            borderRadius: '1rem',
+                            fontWeight: 'bold',
+                            float: 'left',
+                            fontSize: '14px',
+                            width: '100px'
+                        }}
 
-                            maxLength={64}
-                            value={this.state.password}
-                            onChange={this.updatePassword}
-                            onKeyPress={this.handleKeyPress}
-                        />
-                        <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
-                            Invalid password.
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    
-                    <Form.Group style={{ marginTop: '35px' }}>
-                        <Button
-                            variant='dark' 
-                            type='button'
-                            style={{
-                                borderRadius: '1rem',
-                                fontWeight: 'bold',
-                                float: 'left',
-                                fontSize: '14px',
-                                width: '100px'
-                            }}
+                        onClick={this.submitForm}
+                    >
+                        Submit
+                    </Button>
 
-                            onClick={this.submitForm}
-                        >
-                            Submit
-                        </Button>
+                    <Button
+                        variant='dark' 
+                        type='button'
+                        style={{
+                            borderRadius: '1rem',
+                            fontWeight: 'bold',
+                            float: 'right',
+                            fontSize: '14px',
+                            width: '100px'
+                        }}
 
-                        <Button
-                            variant='dark' 
-                            type='button'
-                            style={{
-                                borderRadius: '1rem',
-                                fontWeight: 'bold',
-                                float: 'right',
-                                fontSize: '14px',
-                                width: '100px'
-                            }}
-
-                            onClick={this.switchPage}
-                        >
-                            Register
-                        </Button>
-                    </Form.Group>
-                </Form>
-            </>
+                        onClick={this.props.switchPage}
+                    >
+                        Register
+                    </Button>
+                </Form.Group>
+            </Form>
         );
     }
 
@@ -114,30 +108,33 @@ class LoginForm extends Component {
 
     submitForm() {
         if (this.state.validUsername && this.state.validPassword) {
-            fetch('user/login/', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'username': this.state.username,
-                    'password': this.state.password
-                }
-            })
-            .then((response) => {
-                return response.json();
+            this.props.context.GET('user/login/', {
+                'username': this.state.username,
+                'password': this.state.password
             })
             .then((data) => {
-                if (!data) {
-                    this.setState({
-                        username: '',
-                        password: '',
-                        validUsername: false,
-                        invalidUsername: true,
-                        validPassword: false,
-                        invalidPassword: true
-                    });
-                }
+                if (!data) this.setErrorState();
+                this.props.context.updateUser({
+                    id: data.id,
+                    username: data.username,
+                    email: data.email
+                });
+            })
+            .catch((err) => {
+                this.setErrorState();
             });
         }
+    }
+
+    setErrorState() {
+        this.setState({
+            username: '',
+            password: '',
+            validUsername: false,
+            invalidUsername: true,
+            validPassword: false,
+            invalidPassword: true
+        });
     }
 
     updateUsername(event) {

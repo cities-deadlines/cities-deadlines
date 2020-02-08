@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
 from . import models
@@ -9,7 +8,6 @@ from . import serializers
 
 @api_view(['GET'])
 def register(request):
-
     try:
 
         # fetch user data
@@ -27,7 +25,11 @@ def register(request):
         # login user
         if user is not None:
             auth.login(request, user)
-            return Response(True)
+            return Response({
+                'username': user.username,
+                'email': user.email,
+                'id': user.id
+            })
         else: return Response(False)
 
     except: 
@@ -35,7 +37,6 @@ def register(request):
 
 @api_view(['GET'])
 def login(request):
-
     try:
 
         # fetch user data
@@ -51,17 +52,24 @@ def login(request):
         # login user
         if user is not None:
             auth.login(request, user)
-            return Response(True)
+            return Response({
+                'username': user.username,
+                'email': user.email,
+                'id': user.id
+            })
         else: return Response(False)
 
-    except: 
+    except Exception as e:
+        print(e) 
         return Response(False)
 
-@login_required
 @api_view(['GET'])
 def signout(request):
-
     try:
+
+        # check if user is authenticated
+        if not request.user.is_authenticated:
+            return Response(False, status=401)
 
         # logout user
         auth.logout(request)
@@ -69,3 +77,18 @@ def signout(request):
 
     except:
         return Response(False)
+
+@api_view(['GET'])
+def fetchCurrentUser(request):
+
+    # check if user is authenticated
+    if not request.user.is_authenticated:
+        return Response(False, status=401)
+
+    # return authenticated user 
+    user = request.user 
+    return Response({
+        'username': user.username,
+        'email': user.email,
+        'id': user.id
+    })
