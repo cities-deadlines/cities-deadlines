@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import UserModule from './user';
+import MapModule from './map';
 
 class App extends Component {
     constructor(props) {
@@ -48,6 +49,8 @@ class App extends Component {
                         width: '70%',
                         height: '100%'
                     }}>
+
+                        <MapModule />
 
                     </div>
 
