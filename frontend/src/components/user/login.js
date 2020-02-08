@@ -7,7 +7,10 @@ class LoginForm extends Component {
         this.state = {
             username: '',
             password: '',
-            buttonDisabled: true
+            validUsername: false,
+            invalidUsername: false,
+            validPassword: false,
+            invalidPassword: false
         }
 
         // set functions from parents
@@ -33,21 +36,22 @@ class LoginForm extends Component {
                         >
                             Username
                         </Form.Label>
-                        <Form.Control 
+                        <Form.Control
                             type='username' 
                             placeholder='Username' 
+                            isValid={this.state.validUsername}
+                            isInvalid={this.state.invalidUsername}
 
                             maxLength={15}
                             value={this.state.username}
                             onChange={this.updateUsername}
                         />
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
+                            Invalid username (at least three characters).
+                        </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group 
-                        style={{
-                            marginTop: '-5px'
-                        }}
-                    >
+                    <Form.Group>
                         <Form.Label 
                             style={{
                                 fontWeight: 'bold',
@@ -60,11 +64,16 @@ class LoginForm extends Component {
                             type='password' 
                             placeholder='Password' 
                             autoComplete='off'
+                            isValid={this.state.validPassword}
+                            isInvalid={this.state.invalidPassword}
 
                             maxLength={64}
                             value={this.state.password}
                             onChange={this.updatePassword}
                         />
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
+                            Invalid password (at least eight characters and one number).
+                        </Form.Control.Feedback>
                     </Form.Group>
                     
                     <Form.Group>
@@ -104,17 +113,34 @@ class LoginForm extends Component {
 
     updateUsername(event) {
         const username = event.target.value;
-        if (username.length < 3 || username.match(/^[a-z0-9_-]{3,15}$/i)) {
+        this.setState({ username: username });
+        if (username.match(/^[a-z0-9_-]{3,15}$/i)) {
             this.setState({
-                username: username
+                validUsername: true,
+                invalidUsername: false
+            });
+        }   
+        else {
+            this.setState({
+                validUsername: false,
+                invalidUsername: true
             });
         }
     }
 
     updatePassword(event) {
-        if (event.target.value.match(/^[a-z0-9_-]{3,15}$/i)) {
+        const password = event.target.value;
+        this.setState({ password: password });
+        if (password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,64}$/i)) {
             this.setState({
-                password: event.target.value
+                validPassword: true,
+                invalidPassword: false
+            });
+        }
+        else {
+            this.setState({
+                validPassword: false,
+                invalidPassword: true
             });
         }
     }

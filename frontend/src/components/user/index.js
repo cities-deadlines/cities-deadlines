@@ -65,7 +65,7 @@ class UserModule extends Component {
                         src={LogoIcon} 
                         alt={'Webiste Logo'} 
                         style={{
-                            marginTop: '-35%',
+                            marginTop: '-25%',
                             width: '450px'
                         }}
                     />
@@ -104,7 +104,6 @@ class UserModule extends Component {
     } 
 
     switchPage() {
-        console.log(this.state.currentPage)
         if (this.state.currentPage == 'login') {
             this.registerForm.current.toggleModulePage();
             this.setState({ currentPage: 'register' });
