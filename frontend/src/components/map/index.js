@@ -25,23 +25,23 @@ class MapModule extends Component {
         );
     }
 
-    componentDidMount() {
-
-        console.log("THIERRY HENRY");
-        
+    // Download Konva from CDN, return the script instance in the DOM for use in async code later
+    loadKonva() {
         var aScript = document.createElement('script');
         aScript.type = 'text/javascript';
         aScript.src = "https://unpkg.com/konva@4.1.3/konva.min.js";
     
         document.head.appendChild(aScript);
+        return aScript;
+    }
+
+    componentDidMount() {
+        var aScript = this.loadKonva();
 
         aScript.onload = function() {
 
             var width = document.getElementById('map-container').offsetWidth;
             var height = document.getElementById('map-container').offsetHeight;
-
-            console.log(width);
-            console.log(height);
 
             var stage = new Konva.Stage({
                 container: 'map-container',
