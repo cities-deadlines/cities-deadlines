@@ -25,6 +25,7 @@ class RegisterForm extends Component {
         this.updateEmail = this.updateEmail.bind(this);
         this.updateUsername = this.updateUsername.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
+        this.submitForm = this.submitForm.bind(this);
     }
 
     render() {
@@ -77,7 +78,7 @@ class RegisterForm extends Component {
                             onChange={this.updateUsername}
                         />
                         <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
-                            Invalid username (at least three characters).
+                            Invalid username.
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -102,7 +103,7 @@ class RegisterForm extends Component {
                             onChange={this.updatePassword}
                         />
                         <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
-                            Invalid password (at least eight characters and one number).
+                            Invalid password.
                         </Form.Control.Feedback>
                     </Form.Group>
                     
@@ -116,6 +117,8 @@ class RegisterForm extends Component {
                                 marginTop: '30px',
                                 fontWeight: 'bold'
                             }}
+
+                            onClick={this.submitForm}
                         >
                             Submit
                         </Button>
@@ -139,6 +142,28 @@ class RegisterForm extends Component {
                 </Form>
             </>
         );
+    }
+
+    submitForm() {
+        if (this.state.validEmail && this.state.validUsername
+            && this.state.validPassword) {
+
+            fetch('user/register/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'email': this.state.email,
+                    'username': this.state.username,
+                    'password': this.state.password
+                }
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+            });
+        }
     }
 
     updateEmail(event) {
@@ -178,7 +203,7 @@ class RegisterForm extends Component {
     updatePassword(event) {
         const password = event.target.value;
         this.setState({ password: password });
-        if (password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,64}$/i)) {
+        if (password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i)) {
             this.setState({
                 validPassword: true,
                 invalidPassword: false
