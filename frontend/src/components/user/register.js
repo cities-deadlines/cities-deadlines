@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Formik } from 'formik';
 import { validate } from 'email-validator';
 
 class RegisterForm extends Component {
