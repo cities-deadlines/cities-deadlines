@@ -25,11 +25,11 @@ class MapModule extends Component {
         // draw a skyscraper
         if (row % 2 == 0 && col % 2 == 0) {
             var skyscraperModel = new Konva.Rect({
-                x: 80 * (col / 2),
-                y: 80 * (row / 2),
+                x: 200 * (col / 2),
+                y: 200 * (row / 2),
                 fill: 'gray',
-                height: 60,
-                width: 60
+                height: 160,
+                width: 160
             });
             layer.add(skyscraperModel);
         }
