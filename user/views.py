@@ -59,8 +59,7 @@ def login(request):
             })
         else: return Response(False)
 
-    except Exception as e:
-        print(e) 
+    except:
         return Response(False)
 
 @api_view(['GET'])
@@ -76,19 +75,24 @@ def signout(request):
         return Response(True)
 
     except:
-        return Response(False)
+        return Response(False, status=401)
 
 @api_view(['GET'])
 def fetchCurrentUser(request):
 
-    # check if user is authenticated
-    if not request.user.is_authenticated:
-        return Response(False, status=401)
+    try:
 
-    # return authenticated user 
-    user = request.user 
-    return Response({
-        'username': user.username,
-        'email': user.email,
-        'id': user.id
-    })
+        # check if user is authenticated
+        if not request.user.is_authenticated:
+            return Response(False, status=401)
+
+        # return authenticated user 
+        user = request.user 
+        return Response({
+            'username': user.username,
+            'email': user.email,
+            'id': user.id
+        })
+
+    except:
+        return Response(False, status=401)

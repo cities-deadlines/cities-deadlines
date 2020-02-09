@@ -67,14 +67,14 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
 
     # base data fields (required)
-    email = models.EmailField(_('email'), unique=True, max_length=32)
-    username = models.CharField(_('username'), max_length=15, unique=True)
-    password = models.CharField(_('password'), max_length=64)
+    email = models.EmailField(unique=True, max_length=32, verbose_name='email')
+    username = models.CharField(max_length=15, unique=True, verbose_name='username')
+    password = models.CharField(max_length=64, verbose_name='password')
 
     # user metadata fields (automated)
-    id = models.AutoField(primary_key=True, unique=True)
-    createdAt = models.DateTimeField(auto_now_add=True)
-    isActive = models.BooleanField(default=True)
+    id = models.AutoField(primary_key=True, unique=True, verbose_name='id')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='created_at')
+    is_active = models.BooleanField(default=True, verbose_name='is_active')
 
     # model metadata
     USERNAME_FIELD = 'username'

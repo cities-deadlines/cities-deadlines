@@ -3,9 +3,14 @@ Django settings for main project.
 """
 
 import os
+from pathlib import Path
+
+# import env files
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = 'krp$3vt60%n(yk!w&xa%=b8pqswb6nj8rp)a70ob-z8*r+_&(1'
+SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 ALLOWED_HOSTS = []
 
@@ -56,8 +61,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('RDS_DB_NAME'),
+        'USER': os.getenv('RDS_USERNAME'),
+        'PASSWORD': os.getenv('RDS_PASSWORD'),
+        'HOST': os.getenv('RDS_HOSTNAME'),
+        'PORT': os.getenv('RDS_PORT'),
     }
 }
 
@@ -77,7 +86,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # internationalization
 

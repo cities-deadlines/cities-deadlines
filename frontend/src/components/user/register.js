@@ -140,11 +140,13 @@ class RegisterForm extends Component {
             })
             .then((data) => {
                 if (!data) this.setErrorState();
-                this.props.context.updateUser({
-                    id: data.id,
-                    username: data.username,
-                    email: data.email
-                });
+                else {
+                    this.props.context.updateUser({
+                        id: data.id,
+                        username: data.username,
+                        email: data.email
+                    });
+                }
             })
             .catch((err) => {
                 this.setErrorState();
