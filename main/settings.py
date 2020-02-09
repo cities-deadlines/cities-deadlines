@@ -14,6 +14,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 ALLOWED_HOSTS = []
 
+# application settings
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,7 +59,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-# database 
+# database settings
+
+AUTH_USER_MODEL = 'user.MyUser'
 
 DATABASES = {
     'default': {
@@ -70,7 +74,7 @@ DATABASES = {
     }
 }
 
-# password validation
+# password validation settings
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -87,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# internationalization
+# internationalization settings
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

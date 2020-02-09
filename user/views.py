@@ -9,18 +9,27 @@ from . import serializers
 @api_view(['GET'])
 def register(request):
     try:
+        print(auth.get_user_model()._meta.get_fields())
 
         # fetch user data
         email = request.headers['email']
         username = request.headers['username']
         password = request.headers['password']
 
+        # verify unique email
+        # if auth.get_user_model().users.filter(email=email).exists():
+        #     print('exists')
+
         # create user in manager
-        user = auth.get_user_model().objects.create_user(
+        user = auth.get_user_model().users.create_user(
             email=email, 
             username=username,
             password=password
         )
+
+        # if User.objects.filter(email=email).exists():
+        #     print('exists')
+            # raise ValidationError("This email already used")
 
         # login user
         if user is not None:
@@ -32,7 +41,8 @@ def register(request):
             })
         else: return Response(False)
 
-    except: 
+    except Exception as e:
+        print('Register error: ' + str(e))
         return Response(False)
 
 @api_view(['GET'])
@@ -59,7 +69,8 @@ def login(request):
             })
         else: return Response(False)
 
-    except:
+    except Exception as e:
+        print('Login error: ' + str(e))
         return Response(False)
 
 @api_view(['GET'])
@@ -74,7 +85,8 @@ def signout(request):
         auth.logout(request)
         return Response(True)
 
-    except:
+    except Exception as e:
+        print('Signout error: ' + str(e))
         return Response(False, status=401)
 
 @api_view(['GET'])
@@ -94,5 +106,6 @@ def fetchCurrentUser(request):
             'id': user.id
         })
 
-    except:
+    except Exception as e:
+        print('Fetch current user error: ' + str(e))
         return Response(False, status=401)

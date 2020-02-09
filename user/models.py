@@ -10,66 +10,58 @@ import re
 class UserManager(BaseUserManager):
     
     def create_user(self, email, username, password):
-        try:
 
-            # check for fields
-            if not email: raise ValidationError('No email supplied')
-            if not username: raise ValidationError('No username supplied')
-            if not password: raise ValidationError('No email supplied')
+        # check for fields
+        if not email: raise ValidationError('No email supplied')
+        if not username: raise ValidationError('No username supplied')
+        if not password: raise ValidationError('No email supplied')
 
-            # validate fields
-            try: validate_email(email)
-            except Exception: raise ValidationError('Invalid email supplied')
-            if not re.match(r'^[a-z0-9_-]{3,15}$', username): raise ValidationError('Invalid username supplied')
-            if not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$', password):
-                raise ValidationError('Invalid password supplied')
+        # validate fields
+        try: validate_email(email)
+        except Exception: raise ValidationError('Invalid email')
+        if not re.match(r'^[a-z0-9_-]{3,15}$', username): raise ValidationError('Invalid username (at least 3 characters)')
+        if not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$', password):
+            raise ValidationError('Invalid password (at least 8 characters with one number and special character)')
 
-            user = self.model(
-                username=username,
-                email=self.normalize_email(email)
-            )
-            user.set_password(password)
-            user.save(using=self._db)
-            return user
-
-        except ValidationError as e:
-            print('Failed to create user: ' + str(e))
-            return None
+        user = self.model(
+            username=username,
+            email=self.normalize_email(email)
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
     
     def create_superuser(self, email, username, password):
-        try:
 
-            # check for fields
-            if not username: raise ValidationError('No username supplied')
-            if not email: raise ValidationError('No email supplied')
-            if not password: raise ValidationError('No email supplied')
+        # check for fields
+        if not username: raise ValidationError('No username supplied')
+        if not email: raise ValidationError('No email supplied')
+        if not password: raise ValidationError('No email supplied')
 
-            # validate fields
-            try: validate_email(email)
-            except Exception: raise ValidationError('Invalid email supplied')
-            if not re.match(r'^[a-z0-9_-]{3,15}$', username): raise ValidationError('Invalid username supplied')
-            if not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$', password):
-                raise ValidationError('Invalid password supplied')
+        # validate fields
+        try: validate_email(email)
+        except Exception: raise ValidationError('Invalid email')
+        if not re.match(r'^[a-z0-9_-]{3,15}$', username): raise ValidationError('Invalid username (at least 3 characters)')
+        if not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$', password):
+            raise ValidationError('Invalid password (at least 8 characters with one number and special character)')
 
-            user = self.model(
-                username=username,
-                email=self.normalize_email(email)
-            )
-            user.set_password(password)
-            user.is_superuser = True
-            user.save(using=self._db)
-            return user
+        user = self.model(
+            username=username,
+            email=self.normalize_email(email)
+        )
+        user.set_password(password)
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
 
-        except ValidationError as e:
-            print('Failed to create user: ' + str(e))
-            return None
-
-class User(AbstractBaseUser):
+class MyUser(AbstractBaseUser):
 
     # base data fields (required)
-    email = models.EmailField(unique=True, max_length=32, verbose_name='email')
+    email = models.EmailField(max_length=32, unique=True, verbose_name='email')
     username = models.CharField(max_length=15, unique=True, verbose_name='username')
     password = models.CharField(max_length=64, verbose_name='password')
+
+    coolio = models.CharField(max_length=64, verbose_name='coolio')
 
     # user metadata fields (automated)
     id = models.AutoField(primary_key=True, unique=True, verbose_name='id')
@@ -80,8 +72,8 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
     PASSWORD_FIELD = 'password'
-    REQUIRED_FIELDS = ['email', 'username', 'password']
+    REQUIRED_FIELDS = ['email', 'password']
     
     # model manager
-    objects = UserManager()
+    users = UserManager()
             

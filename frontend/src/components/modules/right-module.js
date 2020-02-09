@@ -27,8 +27,8 @@ const RightModule = props => {
                     <Loader
                         type='Oval'
                         color='black'
-                        height={200}
-                        width={200}
+                        height={100}
+                        width={100}
                     />
                 </div>
             )}
