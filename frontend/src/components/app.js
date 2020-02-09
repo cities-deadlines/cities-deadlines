@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { trackPromise } from 'react-promise-tracker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,15 +25,20 @@ class App extends Component {
     componentDidMount() {
 
         // fetch current user
-        this.GET('user/current/', {})
-        .then((data) => {
-            this.updateUser({
-                id: data.id,
-                username: data.username,
-                email: data.email
-            });
-        })
-        .catch((err) => {});
+        const promise = this.GET('user/current/', {})
+            .then((data) => {
+                this.updateUser({
+                    id: data.id,
+                    username: data.username,
+                    email: data.email
+                });
+            })
+            .catch((err) => {});
+        
+        // track promise after delay
+        setTimeout(() => {
+            trackPromise(promise);
+        }, 50);
     }
 
     render() {

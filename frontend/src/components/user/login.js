@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { trackPromise } from 'react-promise-tracker';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -108,23 +109,25 @@ class LoginForm extends Component {
 
     submitForm() {
         if (this.state.validUsername && this.state.validPassword) {
-            this.props.context.GET('user/login/', {
-                'username': this.state.username,
-                'password': this.state.password
-            })
-            .then((data) => {
-                if (!data) this.setErrorState();
-                else {
-                    this.props.context.updateUser({
-                        id: data.id,
-                        username: data.username,
-                        email: data.email
-                    });
-                }
-            })
-            .catch((err) => {
-                this.setErrorState();
-            });
+            trackPromise(
+                this.props.context.GET('user/login/', {
+                    'username': this.state.username,
+                    'password': this.state.password
+                })
+                .then((data) => {
+                    if (!data) this.setErrorState();
+                    else {
+                        this.props.context.updateUser({
+                            id: data.id,
+                            username: data.username,
+                            email: data.email
+                        });
+                    }
+                })
+                .catch((err) => {
+                    this.setErrorState();
+                })
+            );
         }
     }
 
