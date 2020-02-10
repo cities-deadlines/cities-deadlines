@@ -8,7 +8,7 @@ import {
     RightModule
 } from '../modules/right-module';
 
-import LogoIcon from './../../icons/logo-2.png'
+import LogoIcon from './../../icons/logo-2.png';
 
 class UserModule extends Component {
     constructor(props) {
@@ -54,7 +54,7 @@ class UserModule extends Component {
                     </h4>
                 </div>
 
-                {/* login form */}
+                {/* login page */}
                 <RightModulePage 
                     ref={this.loginForm} 
                     visible={true}
@@ -77,7 +77,7 @@ class UserModule extends Component {
                     
                 </RightModulePage>
 
-                {/* register form */}
+                {/* register page */}
                 <RightModulePage 
                     ref={this.registerForm} 
                     visible={false}
