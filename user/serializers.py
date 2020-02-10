@@ -3,5 +3,5 @@ from . import models
 
 class UserSerializer(serializers.ModelSerializer):    
     class Meta:
-        model = models.MyUser
+        model = models.User
         fields = ['id', 'username', 'email', 'password']

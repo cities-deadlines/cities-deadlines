@@ -61,7 +61,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 # database settings
 
-AUTH_USER_MODEL = 'user.MyUser'
+AUTH_USER_MODEL = 'user.User'
 
 DATABASES = {
     'default': {

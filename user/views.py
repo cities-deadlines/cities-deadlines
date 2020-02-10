@@ -16,21 +16,13 @@ def register(request):
         username = request.headers['username']
         password = request.headers['password']
 
-        # verify unique email
-        # if auth.get_user_model().users.filter(email=email).exists():
-        #     print('exists')
-
         # create user in manager
         user = auth.get_user_model().users.create_user(
             email=email, 
             username=username,
             password=password
         )
-
-        # if User.objects.filter(email=email).exists():
-        #     print('exists')
-            # raise ValidationError("This email already used")
-
+        
         # login user
         if user is not None:
             auth.login(request, user)

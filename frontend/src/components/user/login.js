@@ -162,7 +162,7 @@ class LoginForm extends Component {
     updatePassword(event) {
         const password = event.target.value;
         this.setState({ password: password });
-        if (password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i)) {
+        if (password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,64}$/i)) {
             this.setState({
                 validPassword: true,
                 invalidPassword: false
