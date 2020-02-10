@@ -1,5 +1,13 @@
 import React, { Component } from "react";
 import Konva from 'konva';
+import { Image } from 'react-bootstrap';
+
+const BUILDING_WIDTH = 160;
+const ROAD_WIDTH = BUILDING_WIDTH / 4;
+const BLOCK_WIDTH = BUILDING_WIDTH + ROAD_WIDTH;
+
+// import relevant assets
+import intersection from '../../../img/4-way-intersection-city-dense.png';
 
 class MapModule extends Component {
 
@@ -25,11 +33,11 @@ class MapModule extends Component {
         // draw a skyscraper
         if (row % 2 == 0 && col % 2 == 0) {
             var skyscraperModel = new Konva.Rect({
-                x: 200 * (col / 2),
-                y: 200 * (row / 2),
+                x: BLOCK_WIDTH * (col / 2),
+                y: BLOCK_WIDTH * (row / 2),
                 fill: 'gray',
-                height: 160,
-                width: 160
+                height: BUILDING_WIDTH,
+                width: BUILDING_WIDTH
             });
 
             layer.add(skyscraperModel);
@@ -38,11 +46,11 @@ class MapModule extends Component {
         // draw a vertical road/building filler block
         if (row % 2 == 0 && col % 2 != 0) {
             var vertRoadModel = new Konva.Rect({
-                x: 200 * (col / 2) + 60,
-                y: 200 * (row / 2),
+                x: BLOCK_WIDTH * (col / 2) + 60,
+                y: BLOCK_WIDTH * (row / 2),
                 fill: 'black',
-                width: 40,
-                height: 160
+                width: ROAD_WIDTH,
+                height: BUILDING_WIDTH
             });
             layer.add(vertRoadModel);
         }
@@ -50,11 +58,11 @@ class MapModule extends Component {
         // draw a horizontal road/building filler block
         if (row % 2 != 0 && col % 2 == 0) {
             var vertRoadModel = new Konva.Rect({
-                x: 200 * (col / 2),
-                y: 200 * (row / 2) + 60,
+                x: BLOCK_WIDTH * (col / 2),
+                y: BLOCK_WIDTH * (row / 2) + 60,
                 fill: 'black',
-                width: 160,
-                height: 40
+                width: BUILDING_WIDTH,
+                height: ROAD_WIDTH
             });
             layer.add(vertRoadModel);
         }
@@ -62,20 +70,25 @@ class MapModule extends Component {
         // draw a central road/building filler block
         if (row % 2 == 0 && col % 2 == 0) {
             var vertRoadModel = new Konva.Rect({
-                x: 200 * (col / 2) + 160,
-                y: 200 * (row / 2) + 160,
-                fill: 'yellow',
-                width: 40,
-                height: 40
+                x: BLOCK_WIDTH * (col / 2) + BUILDING_WIDTH,
+                y: BLOCK_WIDTH * (row / 2) + BUILDING_WIDTH,
+                width: ROAD_WIDTH,
+                height: ROAD_WIDTH
             });
 
+            vertRoadModel.fillPatternScale({
+                x: 2,
+                y: 2
+              });
+
             // set fill pattern image
-            var imageObj = new Image();
+
+            var imageObj = new window.Image();
+            imageObj.src = intersection;
             imageObj.onload = function() {
                 vertRoadModel.fillPatternImage(imageObj);
+                layer.add(vertRoadModel);
             };
-            imageObj.src = '/img/4-way-intersection-city-dense.png';
-            layer.add(vertRoadModel);
         }
     }
 
