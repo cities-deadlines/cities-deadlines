@@ -1,8 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from django.core.mail import send_mail
 import re 
 
 class UserManager(BaseUserManager):
@@ -21,6 +23,7 @@ class UserManager(BaseUserManager):
         if not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$', password):
             raise ValidationError('Invalid password (at least 8 characters with one number and special character)')
 
+        # create user
         user = self.model(
             username=username,
             email=self.normalize_email(email),
@@ -43,19 +46,37 @@ class UserManager(BaseUserManager):
         if not re.match(r'^[a-z0-9_-]{3,15}$', username): raise ValidationError('Invalid username (must be 3-15 characters).')
         if not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,64}$', password):
             raise ValidationError('Invalid password (must be 8-64 characters with one number and special character).')
-
+        
+        # create user
         user = self.model(
             username=username,
             email=self.normalize_email(email),
-            is_superuser=True,
+            is_active=True,
             is_staff=True,
-            is_active=True
+            is_superuser=True
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-class User(AbstractUser):
-    
-    # model manager
+class User(AbstractBaseUser, PermissionsMixin):
+
+    # model metadata
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+
+    # base user fields
+    username = models.CharField(_('username'), max_length=150, unique=True)
+    email = models.EmailField(_('email address'), unique=True)
+    is_staff = models.BooleanField(_('staff status'), default=False)
+    is_active = models.BooleanField(_('active'), default=True)
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+
+    # required fields (for django)
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
+
+    # attach custom model manager
     users = UserManager()

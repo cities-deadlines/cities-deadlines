@@ -7,23 +7,42 @@ from . import models
 
 class UserAdmin(BaseUserAdmin):
 
-    list_display = ('username', 'email')
-    list_filter = ('is_superuser',)
+    list_display = ('username', 'email', 'date_joined', 'last_login', 'is_active', 'is_superuser')
+    list_filter = ('is_superuser', 'is_active', 'date_joined')
 
-    # fieldsets = (
-    #     (None, {'fields': ('email', 'password')}),
-    #     ('Permissions', {'fields': ('is_admin',)}),
-    # )
+    fieldsets = (
+        (
+            None, 
+            {
+                'fields': (
+                    'username', 
+                    'email', 
+                    'is_active',
+                    'date_joined',
+                    'last_login'
+                )
+            }
+        ),
+        (
+            'Permissions', 
+            {
+                'fields': (
+                    'is_superuser',
+                    'is_staff'
+                )
+            }
+        )
+    )
     
-    # add_fieldsets = (
-    #     (None, {
-    #         'classes': ('wide',),
-    #         'fields': ('email', 'date_of_birth', 'password1', 'password2'),
-    #     }),
-    # )
-    
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'username', 'password'),
+        }),
+    )
+
     search_fields = ('username', 'email')
-    ordering = ('username', )
+    ordering = ('username', 'email')
     filter_horizontal = ()
 
 # register admin/user
