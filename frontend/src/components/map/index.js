@@ -33,6 +33,19 @@ class MapModule extends Component {
             });
             layer.add(skyscraperModel);
         }
+
+        // draw a vertical road/building filler block
+        if (row % 2 == 0 && col % 2 != 0) {
+            var vertRoadModel = new Konva.Rect({
+                x: 200 * (col / 2) + 60,
+                y: 200 * (row / 2),
+                fill: 'black',
+                width: 40,
+                height: 160
+            });
+            console.log('drawing road');
+            layer.add(vertRoadModel);
+        }
     }
 
     populateMap() {
