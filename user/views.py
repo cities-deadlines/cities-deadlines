@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
+from django.core.exceptions import ValidationError
 from rest_framework.response import Response
 from django.contrib import auth
 
@@ -9,7 +10,6 @@ from . import serializers
 @api_view(['GET'])
 def register(request):
     try:
-        print(auth.get_user_model()._meta.get_fields())
 
         # fetch user data
         email = request.headers['email']
@@ -22,7 +22,7 @@ def register(request):
             username=username,
             password=password
         )
-        
+
         # login user
         if user is not None:
             auth.login(request, user)
@@ -32,6 +32,11 @@ def register(request):
                 'id': user.id
             })
         else: return Response(False)
+
+    except ValidationError as e:
+        return Response({
+            'message': e.messages[0]
+        })
 
     except Exception as e:
         print('Register error: ' + str(e))
@@ -59,7 +64,9 @@ def login(request):
                 'email': user.email,
                 'id': user.id
             })
-        else: return Response(False)
+        else: return Response({
+            'message': 'Incorrect username or password.'
+        })
 
     except Exception as e:
         print('Login error: ' + str(e))

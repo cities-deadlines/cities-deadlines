@@ -66,8 +66,8 @@ class UserModule extends Component {
                         alt={'Webiste Logo'} 
                         style={{
                             position: 'absolute',
-                            top: '12%',
-                            width: '450px'
+                            top: '17%',
+                            width: '250px'
                         }}
                     />
 
@@ -89,8 +89,8 @@ class UserModule extends Component {
                         alt={'Webiste Logo'} 
                         style={{
                             position: 'absolute',
-                            top: '12%',
-                            width: '450px'
+                            top: '17%',
+                            width: '250px'
                         }}
                     />
 

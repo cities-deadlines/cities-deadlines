@@ -15,7 +15,8 @@ class RegisterForm extends Component {
             validUsername: false,
             invalidUsername: false,
             validPassword: false,
-            invalidPassword: false
+            invalidPassword: false,
+            errorMessage: ''
         }
 
         // bind external functions
@@ -32,6 +33,24 @@ class RegisterForm extends Component {
                 width: '60%',
                 marginTop: '175px'
             }}>
+
+                {/* display form error message */}
+                {this.state.errorMessage && (
+                    <Form.Group 
+                        className='text-danger'
+                        style={{ 
+                            marginTop: '35px', 
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Form.Text>
+                            {this.state.errorMessage}
+                        </Form.Text>
+                    </Form.Group>
+                )}
+
                 <Form.Group>
                     <Form.Control 
                         type='email' 
@@ -45,7 +64,7 @@ class RegisterForm extends Component {
                         onChange={this.updateEmail}
                         onKeyPress={this.handleKeyPress}
                     />
-                    <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
+                    <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
                         Invalid email.
                     </Form.Control.Feedback>
                 </Form.Group>
@@ -63,8 +82,8 @@ class RegisterForm extends Component {
                         onChange={this.updateUsername}
                         onKeyPress={this.handleKeyPress}
                     />
-                    <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
-                        Invalid username.
+                    <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
+                        Invalid username (at least 3 characters).
                     </Form.Control.Feedback>
                 </Form.Group>
 
@@ -82,8 +101,8 @@ class RegisterForm extends Component {
                         onChange={this.updatePassword}
                         onKeyPress={this.handleKeyPress}
                     />
-                    <Form.Control.Feedback type='invalid' style={{ fontSize: '13px' }}>
-                        Invalid password.
+                    <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
+                        Invalid password (at least 8 characters with one number and special character).
                     </Form.Control.Feedback>
                 </Form.Group>
                 
@@ -142,6 +161,9 @@ class RegisterForm extends Component {
                 })
                 .then((data) => {
                     if (!data) this.setErrorState();
+                    else if (data.message) {
+                        this.setState({ errorMessage: data.message });
+                    }
                     else {
                         this.props.context.updateUser({
                             id: data.id,
@@ -191,7 +213,7 @@ class RegisterForm extends Component {
     updateUsername(event) {
         const username = event.target.value;
         this.setState({ username: username });
-        if (username.match(/^[a-z0-9_-]{3,15}$/i)) {
+        if (username.match(/^[a-zA-Z0-9_-]{3,15}$/i)) {
             this.setState({
                 validUsername: true,
                 invalidUsername: false
