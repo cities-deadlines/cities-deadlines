@@ -31,6 +31,7 @@ class MapModule extends Component {
                 height: 160,
                 width: 160
             });
+
             layer.add(skyscraperModel);
         }
 
@@ -43,7 +44,37 @@ class MapModule extends Component {
                 width: 40,
                 height: 160
             });
-            console.log('drawing road');
+            layer.add(vertRoadModel);
+        }
+
+        // draw a horizontal road/building filler block
+        if (row % 2 != 0 && col % 2 == 0) {
+            var vertRoadModel = new Konva.Rect({
+                x: 200 * (col / 2),
+                y: 200 * (row / 2) + 60,
+                fill: 'black',
+                width: 160,
+                height: 40
+            });
+            layer.add(vertRoadModel);
+        }
+
+        // draw a central road/building filler block
+        if (row % 2 == 0 && col % 2 == 0) {
+            var vertRoadModel = new Konva.Rect({
+                x: 200 * (col / 2) + 160,
+                y: 200 * (row / 2) + 160,
+                fill: 'yellow',
+                width: 40,
+                height: 40
+            });
+
+            // set fill pattern image
+            var imageObj = new Image();
+            imageObj.onload = function() {
+                vertRoadModel.fillPatternImage(imageObj);
+            };
+            imageObj.src = '/img/4-way-intersection-city-dense.png';
             layer.add(vertRoadModel);
         }
     }
