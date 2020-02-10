@@ -8,6 +8,7 @@ const BLOCK_WIDTH = BUILDING_WIDTH + ROAD_WIDTH;
 
 // import relevant assets
 import intersection from '../../../img/4-way-intersection-city-dense.png';
+import road from '../../../img/4-lane-road-city-dense.png';
 
 class MapModule extends Component {
 
@@ -45,26 +46,47 @@ class MapModule extends Component {
 
         // draw a vertical road/building filler block
         if (row % 2 == 0 && col % 2 != 0) {
-            var vertRoadModel = new Konva.Rect({
-                x: BLOCK_WIDTH * (col / 2) + 60,
-                y: BLOCK_WIDTH * (row / 2),
-                fill: 'black',
-                width: ROAD_WIDTH,
-                height: BUILDING_WIDTH
-            });
-            layer.add(vertRoadModel);
+
+            var imageObj = new window.Image();
+            imageObj.src = road;
+            imageObj.onload = function() {
+                var vertRoadModel = new Konva.Rect({
+                    x: BLOCK_WIDTH * (col / 2) + 60,
+                    y: BLOCK_WIDTH * (row / 2),
+                    width: ROAD_WIDTH,
+                    height: BUILDING_WIDTH,
+                    fillPatternImage: imageObj,
+                    fillPatternScaleX: 2,
+                    fillPatternScaleY: 2,
+                    fillPatternRotation: 90
+                });
+                layer.add(vertRoadModel);
+                var ctx = layer.getContext()._context;
+                ctx.imageSmoothingEnabled = false;
+                layer.draw();
+            };
         }
 
         // draw a horizontal road/building filler block
         if (row % 2 != 0 && col % 2 == 0) {
-            var vertRoadModel = new Konva.Rect({
-                x: BLOCK_WIDTH * (col / 2),
-                y: BLOCK_WIDTH * (row / 2) + 60,
-                fill: 'black',
-                width: BUILDING_WIDTH,
-                height: ROAD_WIDTH
-            });
-            layer.add(vertRoadModel);
+
+            var imageObj = new window.Image();
+            imageObj.src = road;
+            imageObj.onload = function() {
+                var vertRoadModel = new Konva.Rect({
+                    x: BLOCK_WIDTH * (col / 2),
+                    y: BLOCK_WIDTH * (row / 2) + 60,
+                    width: BUILDING_WIDTH,
+                    height: ROAD_WIDTH,
+                    fillPatternImage: imageObj,
+                    fillPatternScaleX: 2,
+                    fillPatternScaleY: 2
+                });
+                layer.add(vertRoadModel);
+                var ctx = layer.getContext()._context;
+                ctx.imageSmoothingEnabled = false;
+                layer.draw();
+            };
         }
 
         // draw a central road/building filler block
