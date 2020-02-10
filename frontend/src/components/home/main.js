@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import { trackPromise } from 'react-promise-tracker';
 
 class MainForm extends Component {
     constructor(props) {
@@ -28,11 +29,13 @@ class MainForm extends Component {
     }
 
     signOut() {
-        this.props.context.GET('user/signout/', {})
-        .then((data) => {
-            this.props.context.updateUser(null);
-        })
-        .catch((err) => {});
+        trackPromise(
+            this.props.context.GET('user/signout/', {})
+            .then((data) => {
+                this.props.context.updateUser(null);
+            })
+            .catch((err) => {})
+        );
     }
 }
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
+from django.core.exceptions import ValidationError
 from rest_framework.response import Response
 from django.contrib import auth
 
@@ -16,7 +17,7 @@ def register(request):
         password = request.headers['password']
 
         # create user in manager
-        user = auth.get_user_model().objects.create_user(
+        user = auth.get_user_model().users.create_user(
             email=email, 
             username=username,
             password=password
@@ -32,7 +33,13 @@ def register(request):
             })
         else: return Response(False)
 
-    except: 
+    except ValidationError as e:
+        return Response({
+            'message': e.messages[0]
+        })
+
+    except Exception as e:
+        print('Register error: ' + str(e))
         return Response(False)
 
 @api_view(['GET'])
@@ -57,9 +64,12 @@ def login(request):
                 'email': user.email,
                 'id': user.id
             })
-        else: return Response(False)
+        else: return Response({
+            'message': 'Incorrect username or password.'
+        })
 
-    except:
+    except Exception as e:
+        print('Login error: ' + str(e))
         return Response(False)
 
 @api_view(['GET'])
@@ -74,7 +84,8 @@ def signout(request):
         auth.logout(request)
         return Response(True)
 
-    except:
+    except Exception as e:
+        print('Signout error: ' + str(e))
         return Response(False, status=401)
 
 @api_view(['GET'])
@@ -94,5 +105,6 @@ def fetchCurrentUser(request):
             'id': user.id
         })
 
-    except:
+    except Exception as e:
+        print('Fetch current user error: ' + str(e))
         return Response(False, status=401)

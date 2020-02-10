@@ -1,19 +1,48 @@
 import React, { Component } from 'react';
+import { usePromiseTracker } from 'react-promise-tracker';
+import Loader from 'react-loader-spinner';
 
 import UserContext from '../user/context';
 
-class RightModule extends Component {
-    render() {
-        return (
+const RightModule = props => {
+
+    // track loading promise
+    const { promiseInProgress } = usePromiseTracker();
+
+    return (
+        <>
+            {promiseInProgress && (
+                <div 
+                    style={{
+                        position: 'absolute',
+                        zIndex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: '100%',
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <Loader
+                        type='Oval'
+                        color='black'
+                        height={100}
+                        width={100}
+                    />
+                </div>
+            )}
+            
             <div style={{
                 position: 'relative',
                 height: '100%',
-                width: '100%'
+                width: '100%',
+                filter: promiseInProgress ? 'blur(3px)' : 'blur(0px)'
             }}>
-                {this.props.children}
+                {props.children}
             </div>
-        );
-    }
+        </>
+    );
 }
 
 class RightModulePage extends Component {
