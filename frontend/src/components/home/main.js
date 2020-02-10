@@ -18,17 +18,18 @@ class MainForm extends Component {
             <>
 
                 {/* balance display */}
-                <Row >
+                <Row>
                     <div 
                         style={{
                             display: 'flex',
-                            width: '250px',
+                            width: '225px',
                             height: '45px',
 
                             justifyContent: 'center',
                             alignItems: 'center',
 
                             backgroundColor: 'white',
+                            cursor: 'default',
 
                             borderRadius: '10px',
                             borderColor: 'gray',
@@ -40,7 +41,7 @@ class MainForm extends Component {
                             <b>Balance:</b> {this.state.balance}
                         </div>
                     </div>
- 
+
                     <div 
                         style={{
                             display: 'flex',
