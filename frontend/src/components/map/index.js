@@ -69,25 +69,22 @@ class MapModule extends Component {
 
         // draw a central road/building filler block
         if (row % 2 == 0 && col % 2 == 0) {
-            var vertRoadModel = new Konva.Rect({
-                x: BLOCK_WIDTH * (col / 2) + BUILDING_WIDTH,
-                y: BLOCK_WIDTH * (row / 2) + BUILDING_WIDTH,
-                width: ROAD_WIDTH,
-                height: ROAD_WIDTH
-            });
-
-            vertRoadModel.fillPatternScale({
-                x: 2,
-                y: 2
-              });
-
-            // set fill pattern image
-
             var imageObj = new window.Image();
             imageObj.src = intersection;
             imageObj.onload = function() {
-                vertRoadModel.fillPatternImage(imageObj);
+                var vertRoadModel = new Konva.Rect({
+                    x: BLOCK_WIDTH * (col / 2) + BUILDING_WIDTH,
+                    y: BLOCK_WIDTH * (row / 2) + BUILDING_WIDTH,
+                    width: ROAD_WIDTH,
+                    height: ROAD_WIDTH,
+                    fillPatternImage: imageObj,
+                    fillPatternScaleX: 2,
+                    fillPatternScaleY: 2
+                });
                 layer.add(vertRoadModel);
+                var ctx = layer.getContext()._context;
+                ctx.imageSmoothingEnabled = false;
+                layer.draw();
             };
         }
     }
