@@ -117,6 +117,9 @@ class MapModule extends Component {
         var layer = new Konva.Layer();
         this.stage.add(layer);
 
+        var ctx = layer.getContext()._context;
+        ctx.imageSmoothingEnabled = false;
+
         var i = 0;
         for (i = 0; i < map.length; i++) {
             var j = 0;
