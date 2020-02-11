@@ -10,6 +10,7 @@ const BLOCK_WIDTH = BUILDING_WIDTH + ROAD_WIDTH;
 import intersection from '../../../img/4-way-intersection-city-dense.png';
 import road from '../../../img/4-lane-road-city-dense.png';
 import skyscraper1 from '../../../img/skyscraper-dense-parallax-1.png'
+import tripletowers1 from '../../../img/triple-towers-1.png'
 
 class MapModule extends Component {
 
@@ -29,6 +30,11 @@ class MapModule extends Component {
         );
     }
 
+    selectAsset(type) {
+        if (type == "skyscraper1") {return skyscraper1;}
+        else if (type == "tripletowers1") { return tripletowers1; }
+    }
+
     drawAsset(row, col, type, layer) {
         // how many cases do we have here?
         // we have the building case, which is if both indexes are even
@@ -36,7 +42,7 @@ class MapModule extends Component {
         // draw a skyscraper
         if (row % 2 == 0 && col % 2 == 0) {
             var imageObj = new window.Image();
-            imageObj.src = skyscraper1;
+            imageObj.src = this.selectAsset(type);
             imageObj.onload = function() {
                 var skyscraperModel = new Konva.Rect({
                     x: BLOCK_WIDTH * (col / 2),
@@ -123,11 +129,11 @@ class MapModule extends Component {
     }
 
     populateMap() {
-        var map = [['skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
+        var map = [['tripletowers1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'tripletowers1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'tripletowers1', 'road'],
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road'],
-                ['skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
+                ['skyscraper1', 'road', 'skyscraper1', 'road', 'tripletowers1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'tripletowers1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road'],
-                ['skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
+                ['skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'tripletowers1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road'],
                 ['skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road'],
