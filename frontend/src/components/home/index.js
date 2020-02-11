@@ -6,7 +6,7 @@ import {
 } from '../modules/right-module';
 import MainForm from './main';
 import OwnedForm from './owned';
-import FollowedForm from './followed';
+import TrackedForm from './followed';
 import PropertyForm from './property';
 
 class HomeModule extends Component {
@@ -56,7 +56,7 @@ class HomeModule extends Component {
                 {/* followed page */}
                 <RightModulePage visible={false}>
 
-                    <FollowedForm />
+                    <TrackedForm />
 
                 </RightModulePage>
 

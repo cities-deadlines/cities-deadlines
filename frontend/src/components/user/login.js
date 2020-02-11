@@ -92,7 +92,7 @@ class LoginForm extends Component {
                             fontWeight: 'bold',
                             float: 'left',
                             fontSize: '14px',
-                            width: '100px'
+                            width: '42%'
                         }}
 
                         onClick={this.submitForm}
@@ -108,7 +108,7 @@ class LoginForm extends Component {
                             fontWeight: 'bold',
                             float: 'right',
                             fontSize: '14px',
-                            width: '100px'
+                            width: '42%'
                         }}
 
                         onClick={this.props.switchPage}

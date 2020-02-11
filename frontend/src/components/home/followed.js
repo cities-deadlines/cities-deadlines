@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class FollowedForm extends Component {
+class TrackedForm extends Component {
     constructor(props) {
         super(props);
     }
@@ -14,4 +14,4 @@ class FollowedForm extends Component {
     }
 }
 
-export default FollowedForm;
+export default TrackedForm;

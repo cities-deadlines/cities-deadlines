@@ -63,6 +63,7 @@ class UserModule extends Component {
                     {/* website logo */}
                     <Image 
                         src={LogoIcon} 
+                        draggable={false}
                         alt={'Webiste Logo'} 
                         style={{
                             position: 'absolute',
@@ -86,6 +87,7 @@ class UserModule extends Component {
                     {/* website logo */}
                     <Image 
                         src={LogoIcon} 
+                        draggable={false}
                         alt={'Webiste Logo'} 
                         style={{
                             position: 'absolute',
