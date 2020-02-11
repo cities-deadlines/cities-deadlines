@@ -9,12 +9,14 @@ const BLOCK_WIDTH = BUILDING_WIDTH + ROAD_WIDTH;
 // import relevant assets
 import intersection from '../../../img/4-way-intersection-city-dense.png';
 import road from '../../../img/4-lane-road-city-dense.png';
+import skyscraper1 from '../../../img/skyscraper-dense-parallax-1.png'
 
 class MapModule extends Component {
 
     constructor(props) {
         super(props);
         this.stage = null;
+        this.cityLayer = null
     }
 
     render() {
@@ -33,25 +35,32 @@ class MapModule extends Component {
 
         // draw a skyscraper
         if (row % 2 == 0 && col % 2 == 0) {
-            var skyscraperModel = new Konva.Rect({
-                x: BLOCK_WIDTH * (col / 2),
-                y: BLOCK_WIDTH * (row / 2),
-                fill: 'gray',
-                height: BUILDING_WIDTH,
-                width: BUILDING_WIDTH
-            });
-
-            layer.add(skyscraperModel);
+            var imageObj = new window.Image();
+            imageObj.src = skyscraper1;
+            imageObj.onload = function() {
+                var skyscraperModel = new Konva.Rect({
+                    x: BLOCK_WIDTH * (col / 2),
+                    y: BLOCK_WIDTH * (row / 2),
+                    height: BUILDING_WIDTH,
+                    width: BUILDING_WIDTH,
+                    fillPatternImage: imageObj,
+                    fillPatternScaleX: 2,
+                    fillPatternScaleY: 2
+                });
+                layer.add(skyscraperModel);
+                layer.getContext()._context.imageSmoothingEnabled = false;
+                layer.draw();
+            };
         }
 
         // draw a vertical road/building filler block
-        if (row % 2 == 0 && col % 2 != 0) {
+        else if (row % 2 == 0 && col % 2 != 0) {
 
             var imageObj = new window.Image();
             imageObj.src = road;
             imageObj.onload = function() {
                 var vertRoadModel = new Konva.Rect({
-                    x: BLOCK_WIDTH * (col / 2) + 60,
+                    x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
                     y: BLOCK_WIDTH * (row / 2),
                     width: ROAD_WIDTH,
                     height: BUILDING_WIDTH,
@@ -68,14 +77,14 @@ class MapModule extends Component {
         }
 
         // draw a horizontal road/building filler block
-        if (row % 2 != 0 && col % 2 == 0) {
+        else if (row % 2 != 0 && col % 2 == 0) {
 
             var imageObj = new window.Image();
             imageObj.src = road;
             imageObj.onload = function() {
                 var vertRoadModel = new Konva.Rect({
                     x: BLOCK_WIDTH * (col / 2),
-                    y: BLOCK_WIDTH * (row / 2) + 60,
+                    y: BLOCK_WIDTH * (Math.floor((row / 2)) + 1) - ROAD_WIDTH,
                     width: BUILDING_WIDTH,
                     height: ROAD_WIDTH,
                     fillPatternImage: imageObj,
@@ -90,18 +99,20 @@ class MapModule extends Component {
         }
 
         // draw a central road/building filler block
-        if (row % 2 == 0 && col % 2 == 0) {
+        else if (row % 2 != 0 && col % 2 != 0) {
+            console.log("Creating central roading block");
             var imageObj = new window.Image();
             imageObj.src = intersection;
             imageObj.onload = function() {
                 var vertRoadModel = new Konva.Rect({
-                    x: BLOCK_WIDTH * (col / 2) + BUILDING_WIDTH,
-                    y: BLOCK_WIDTH * (row / 2) + BUILDING_WIDTH,
+                    x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
+                    y: BLOCK_WIDTH * (Math.floor((row / 2)) + 1) - ROAD_WIDTH,
                     width: ROAD_WIDTH,
                     height: ROAD_WIDTH,
                     fillPatternImage: imageObj,
                     fillPatternScaleX: 2,
-                    fillPatternScaleY: 2
+                    fillPatternScaleY: 2,
+                    fillPatternRotation: Math.floor(Math.random() * 4) * 90
                 });
                 layer.add(vertRoadModel);
                 var ctx = layer.getContext()._context;
@@ -133,21 +144,21 @@ class MapModule extends Component {
                 ['skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road']];
 
-        var layer = new Konva.Layer();
-        this.stage.add(layer);
+        this.cityLayer = new Konva.Layer();
+        this.stage.add(this.cityLayer);
 
-        var ctx = layer.getContext()._context;
+        var ctx = this.cityLayer.getContext()._context;
         ctx.imageSmoothingEnabled = false;
 
         var i = 0;
         for (i = 0; i < map.length; i++) {
             var j = 0;
             for (j = 0; j < map[0].length; j++) {
-                this.drawAsset(i, j, map[i][j], layer);
+                this.drawAsset(i, j, map[i][j], this.cityLayer);
             }
         }
 
-        layer.draw();
+        this.cityLayer.draw();
     }
 
     componentDidMount() {
@@ -161,33 +172,13 @@ class MapModule extends Component {
             id: "map-konva-layer"
         });
 
-        //var layer = new Konva.Layer();
-        //this.stage.add(layer);
-
         window.addEventListener("resize", function(e) {
             this.stage.height(document.getElementById('map-container').offsetHeight);
             this.stage.width(document.getElementById('map-container').offsetWidth);
+            // ensure that antialiasing remains off
+            var ctx = this.cityLayer.getContext()._context;
+            ctx.imageSmoothingEnabled = false;
         }.bind(this), false);
-
-        //var WIDTH = 3000;
-        //var HEIGHT = 3000;
-        //var NUMBER = 200;
-
-        // code just to actally generate content; temporary
-        /*function generateNode() {
-            return new Konva.Circle({
-                x: WIDTH * Math.random(),
-                y: HEIGHT * Math.random(),
-                radius: 50,
-                fill: 'red',
-                stroke: 'black'
-            });
-        }
-
-        for (var i = 0; i < NUMBER; i++) {
-            layer.add(generateNode());
-        }
-        layer.draw();*/
 
         this.populateMap();
     }
