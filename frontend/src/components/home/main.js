@@ -84,7 +84,7 @@ class MainForm extends Component {
                             backgroundColor: 'black'
                         }}
                     >
-                        Your Owned Properties <b style={{ float: 'right' }}>></b>
+                        Owned Properties <b style={{ float: 'right' }}>></b>
                     </Button>
                     
                     {/* go to tracked properties */}
@@ -101,7 +101,7 @@ class MainForm extends Component {
                             backgroundColor: 'black'
                         }}
                     >    
-                        Your Tracked Properties <b style={{ float: 'right' }}>></b>
+                        Tracked Properties <b style={{ float: 'right' }}>></b>
                     </Button>
                 </div>
 

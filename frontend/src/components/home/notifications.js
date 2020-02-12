@@ -43,27 +43,23 @@ class NotificationsList extends Component {
                     <b>Recent Transactions</b>
                 </div>
 
-                <div style={{
-                    height: '100%',
-                    overflowY: 'scroll'
-                }}>
-                    <NotificationEntry new={true} time='9h' message='test notification' />
-
-                    <NotificationEntry new={true} time='9h' message='test notification' />
-
-                    <NotificationEntry new={false} time='9h' message='test notification' />
-
-                    <NotificationEntry new={true} time='9h' message='test notification' />
-
-                    <NotificationEntry new={true} time='9h' message='test notification' />
-
-                    <NotificationEntry new={true} time='9h' message='test notification' />
-
-                    <NotificationEntry new={true} time='9h' message='test notification' />
-
-                    <NotificationEntry new={true} time='9h' message='test notification' />
-
-                    <NotificationEntry new={true} time='9h' message='test notification' />
+                <div 
+                    style={{
+                        height: '100%',
+                        overflowY: 'scroll'
+                    }}
+                >
+                    <NotificationEntry new={true} time='9h' message='Test notification 1' />
+                    <NotificationEntry new={true} time='10h' message='Test notification 2' />
+                    <NotificationEntry new={true} time='11h' message='Test notification 3' />
+                    <NotificationEntry new={false} time='14h' message='Test notification 4' />
+                    <NotificationEntry new={true} time='23h' message='Test notification 5' />
+                    <NotificationEntry new={true} time='1d' message='Test notification 6' />
+                    <NotificationEntry new={false} time='1d' message='Test notification 7' />
+                    <NotificationEntry new={false} time='3d' message='Test notification 8' />
+                    <NotificationEntry new={false} time='1w' message='Test notification 9' />
+                    <NotificationEntry new={false} time='1w' message='Test notification 10' />
+                    <NotificationEntry new={false} time='1w' message='Test notification 11' />
                 </div>
             </div>
         );
@@ -122,6 +118,14 @@ class NotificationEntry extends Component {
                     />
                 )}
 
+                <div
+                    style={{
+                        fontSize: '13px'
+                    }}
+                >
+                    {this.props.message}
+                </div>
+
                 <div 
                     style={{
                         position: 'absolute',
@@ -130,14 +134,6 @@ class NotificationEntry extends Component {
                     }}
                 >
                     <i>{this.props.time} ago</i>
-                </div>
-
-                <div
-                    style={{
-                        fontSize: '13px'
-                    }}
-                >
-                    {this.props.message}
                 </div>
             </div>
         );
