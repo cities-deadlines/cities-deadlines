@@ -21,7 +21,9 @@ class TrackedForm extends Component {
                     style={{ 
                         position: 'absolute',
                         bottom: '3%',
-                        marginTop: '30px' 
+                        marginTop: '30px',
+                        borderColor: 'black',
+                        backgroundColor: 'black'
                     }}
                     
                     onClick={this.props.closeTrackedPage}

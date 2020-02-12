@@ -12,12 +12,12 @@ class NotificationsList extends Component {
                 style={{
                     display: 'flex',
                     height: '100%',
-                    width: '85%',
+                    width: '80%',
                     flexDirection: 'column',
                     borderColor: 'gray',
                     borderWidth: '1px',
                     borderStyle: 'solid',
-                    borderRadius: '10px',
+                    borderRadius: '5px',
                     overflowY: 'hidden'
                 }}
             >
@@ -30,6 +30,7 @@ class NotificationsList extends Component {
                         height: '40px',
                         justifyContent: 'center',
                         alignItems: 'center',
+                        fontSize: '15px',
                 
                         backgroundColor: '#f2f2f2',
                         borderTopLeftRadius: '10px',

@@ -24,7 +24,7 @@ class MainForm extends Component {
                     style={{
                         position: 'absolute',
                         display: 'flex',
-                        width: '75%',
+                        width: '80%',
                         height: '48px',
                         top: '10%',
                         alignItems: 'center',
@@ -32,7 +32,7 @@ class MainForm extends Component {
                         backgroundColor: '#f2f2f2',
                         cursor: 'default',
 
-                        borderRadius: '10px',
+                        borderRadius: '5px',
                         borderColor: 'gray',
                         borderWidth: '1px',
                         borderStyle: 'solid'
@@ -41,7 +41,7 @@ class MainForm extends Component {
                     <div 
                         style={{ 
                             fontSize: '18px',
-                            marginLeft: '20px'
+                            marginLeft: '25px'
                         }}
                     >
                         <b>Balance:</b> {this.state.balance}
@@ -79,7 +79,9 @@ class MainForm extends Component {
                         style={{
                             width: '275px',
                             height: '40px',
-                            fontSize: '15px'
+                            fontSize: '15px',
+                            borderColor: 'black',
+                            backgroundColor: 'black'
                         }}
                     >
                         Your Owned Properties <b style={{ float: 'right' }}>></b>
@@ -94,7 +96,9 @@ class MainForm extends Component {
                             width: '275px',
                             marginTop: '20px',
                             height: '40px',
-                            fontSize: '15px'
+                            fontSize: '15px',
+                            borderColor: 'black',
+                            backgroundColor: 'black'
                         }}
                     >    
                         Your Tracked Properties <b style={{ float: 'right' }}>></b>
@@ -108,7 +112,7 @@ class MainForm extends Component {
                         top: '40%',
                         display: 'flex',
                         width: '100%',
-                        height: '47%',
+                        height: '50%',
                         justifyContent: 'center',
                     }}
                 >
@@ -123,7 +127,9 @@ class MainForm extends Component {
                     style={{ 
                         position: 'absolute',
                         bottom: '3%',
-                        marginTop: '30px' 
+                        marginTop: '30px',
+                        borderColor: 'black',
+                        backgroundColor: 'black'
                     }}
                     
                     onClick={this.signOut}

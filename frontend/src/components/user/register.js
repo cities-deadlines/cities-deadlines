@@ -115,7 +115,9 @@ class RegisterForm extends Component {
                             fontWeight: 'bold',
                             float: 'left',
                             fontSize: '14px',
-                            width: '42%'
+                            width: '42%',
+                            borderColor: 'black',
+                            backgroundColor: 'black'
                         }}
 
                         onClick={this.submitForm}
@@ -131,7 +133,9 @@ class RegisterForm extends Component {
                             fontWeight: 'bold',
                             float: 'right',
                             fontSize: '14px',
-                            width: '42%'
+                            width: '42%',
+                            borderColor: 'black',
+                            backgroundColor: 'black'
                         }}
 
                         onClick={this.props.switchPage}

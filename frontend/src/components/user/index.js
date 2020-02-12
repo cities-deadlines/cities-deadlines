@@ -18,7 +18,6 @@ class UserModule extends Component {
         }
 
         // create refs for user forms
-        this.loginForm = React.createRef();
         this.registerForm = React.createRef();
 
         // bind external functions
@@ -55,10 +54,7 @@ class UserModule extends Component {
                 </div>
 
                 {/* login page */}
-                <RightModulePage 
-                    ref={this.loginForm} 
-                    visible={true}
-                >
+                <RightModulePage visible={true}>
 
                     {/* website logo */}
                     <Image 
