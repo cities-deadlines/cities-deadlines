@@ -14,7 +14,7 @@ class UserModule extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: 'login'
+            currentPage: 'Login'
         }
 
         // create refs for user forms
@@ -50,7 +50,7 @@ class UserModule extends Component {
                             fontWeight: 'bolder'
                         }}
                     >
-                        {(this.state.currentPage == 'login') ? 'Login' : 'Register'}
+                        {this.state.currentPage}
                     </h4>
                 </div>
 
@@ -107,13 +107,13 @@ class UserModule extends Component {
     } 
 
     switchPage() {
-        if (this.state.currentPage == 'login') {
+        if (this.state.currentPage == 'Login') {
             this.registerForm.current.toggleModulePage();
-            this.setState({ currentPage: 'register' });
+            this.setState({ currentPage: 'Register' });
         }
-        else if (this.state.currentPage == 'register') {
+        else if (this.state.currentPage == 'Register') {
             this.registerForm.current.toggleModulePage();
-            this.setState({ currentPage: 'login' });
+            this.setState({ currentPage: 'Login' });
         }   
     }
 }

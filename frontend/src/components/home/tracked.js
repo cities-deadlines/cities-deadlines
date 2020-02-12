@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
-class OwnedForm extends Component {
+class TrackedForm extends Component {
     constructor(props) {
         super(props);
     }
@@ -10,7 +10,7 @@ class OwnedForm extends Component {
         return (
             <>
                 <div>
-                    Owned Properties
+                    Tracked Properties
                 </div>
 
                 {/* back button */}
@@ -24,7 +24,7 @@ class OwnedForm extends Component {
                         marginTop: '30px' 
                     }}
                     
-                    onClick={this.props.closeOwnedPage}
+                    onClick={this.props.closeTrackedPage}
                 >
                     Back
                 </Button>
@@ -33,4 +33,4 @@ class OwnedForm extends Component {
     }
 }
 
-export default OwnedForm;
+export default TrackedForm;

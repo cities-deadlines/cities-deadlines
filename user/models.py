@@ -91,7 +91,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
 
     # base user fields
-    username = models.CharField(_('username'), max_length=150, unique=True)
+    username = models.CharField(_('username'), max_length=15, unique=True)
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(_('staff status'), default=False)
     is_active = models.BooleanField(_('active'), default=True)

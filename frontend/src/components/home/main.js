@@ -24,11 +24,9 @@ class MainForm extends Component {
                     style={{
                         position: 'absolute',
                         display: 'flex',
-                        width: '80%',
-                        height: '56px',
+                        width: '75%',
+                        height: '48px',
                         top: '10%',
-
-                        justifyContent: 'center',
                         alignItems: 'center',
 
                         backgroundColor: '#f2f2f2',
@@ -40,7 +38,12 @@ class MainForm extends Component {
                         borderStyle: 'solid'
                     }}
                 >
-                    <div style={{ fontSize: '18px' }}>
+                    <div 
+                        style={{ 
+                            fontSize: '18px',
+                            marginLeft: '20px'
+                        }}
+                    >
                         <b>Balance:</b> {this.state.balance}
                     </div>
 
@@ -61,7 +64,7 @@ class MainForm extends Component {
                     style={{
                         position: 'absolute',
                         display: 'flex',
-                        top: '24%',
+                        top: '22%',
                         justifyContent: 'center',
                         alignItems: 'center',
                         flexDirection: 'column'
@@ -72,6 +75,7 @@ class MainForm extends Component {
                     <Button
                         variant='dark'
                         type='button'
+                        onClick={this.props.openOwnedPage}
                         style={{
                             width: '275px',
                             height: '40px',
@@ -85,6 +89,7 @@ class MainForm extends Component {
                     <Button
                         variant='dark'
                         type='button'
+                        onClick={this.props.openTrackedPage}
                         style={{
                             width: '275px',
                             marginTop: '20px',
@@ -100,10 +105,10 @@ class MainForm extends Component {
                 <div 
                     style={{ 
                         position: 'absolute',
-                        top: '43%',
+                        top: '40%',
                         display: 'flex',
                         width: '100%',
-                        height: '42%',
+                        height: '47%',
                         justifyContent: 'center',
                     }}
                 >
@@ -114,6 +119,7 @@ class MainForm extends Component {
                 <Button
                     variant='dark'
                     type='button'
+                    size='sm'
                     style={{ 
                         position: 'absolute',
                         bottom: '3%',

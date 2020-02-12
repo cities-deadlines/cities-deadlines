@@ -6,16 +6,31 @@ import {
 } from '../modules/right-module';
 import MainForm from './main';
 import OwnedForm from './owned';
-import TrackedForm from './followed';
+import TrackedForm from './tracked';
 import PropertyForm from './property';
 
 class HomeModule extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
+            previousPage: 'Home',
             currentPage: 'Home'
         }
-    }
+
+        // create refs for home forms
+        this.mainForm = React.createRef();
+        this.ownedForm = React.createRef();
+        this.trackedForm = React.createRef();
+        this.propertyForm = React.createRef();
+
+        // bind external functions
+        this.openOwnedPage = this.openOwnedPage.bind(this);
+        this.closeOwnedPage = this.closeOwnedPage.bind(this);
+        this.openTrackedPage = this.openTrackedPage.bind(this);
+        this.closeTrackedPage = this.closeTrackedPage.bind(this);
+        this.openPropertyPage = this.openPropertyPage.bind(this);
+        this.closePropertyPage = this.closePropertyPage.bind(this);
+    }   
 
     render() {
         return (
@@ -47,34 +62,91 @@ class HomeModule extends Component {
                 </div>
 
                 {/* main page */}
-                <RightModulePage visible={true}>
+                <RightModulePage 
+                    ref={this.mainForm}
+                    visible={true}
+                >
 
-                    <MainForm />
+                    <MainForm 
+                        openOwnedPage={this.openOwnedPage}
+                        openTrackedPage={this.openTrackedPage}
+                        openPropertyPage={this.openPropertyPage}
+                    />
 
                 </RightModulePage>
 
-                {/* followed page */}
-                <RightModulePage visible={false}>
+                {/* tracked page */}
+                <RightModulePage 
+                    ref={this.trackedForm}
+                    visible={false}
+                >
 
-                    <TrackedForm />
+                    <TrackedForm 
+                        closeTrackedPage={this.closeTrackedPage}
+                        openPropertyPage={this.openPropertyPage}
+                    />
 
                 </RightModulePage>
 
                 {/* owned page */}
-                <RightModulePage visible={false}>
+                <RightModulePage 
+                    ref={this.ownedForm}
+                    visible={false}
+                >
 
-                    <OwnedForm />
+                    <OwnedForm 
+                        closeOwnedPage={this.closeOwnedPage}
+                        openPropertyPage={this.openPropertyPage}
+                    />
 
                 </RightModulePage>
 
                 {/* property page */}
-                <RightModulePage visible={false}>
+                <RightModulePage 
+                    ref={this.propertyForm}
+                    visible={false}
+                >
 
-                    <PropertyForm />
+                    <PropertyForm 
+                        closePropertyPage={this.closePropertyPage}
+                    />
 
                 </RightModulePage>
             </RightModule>
         );
+    }
+
+    openOwnedPage() {
+        this.setState({ currentPage: 'Owned Properties' });
+        this.ownedForm.current.toggleModulePage();
+    }
+
+    closeOwnedPage() {
+        this.setState({ currentPage: 'Home' });
+        this.ownedForm.current.toggleModulePage();
+    }
+
+    openTrackedPage() {
+        this.setState({ currentPage: 'Tracked Properties' });
+        this.trackedForm.current.toggleModulePage();
+    }
+
+    closeTrackedPage() {
+        this.setState({ currentPage: 'Home' });
+        this.trackedForm.current.toggleModulePage();
+    }
+
+    openPropertyPage(previousPage) {
+        this.setState({ 
+            currentPage: 'Property',
+            previousPage: previousPage
+        });
+        this.propertyForm.current.toggleModulePage();
+    }
+
+    closePropertyPage() {
+        this.setState({ currentPage: this.state.previousPage });
+        this.propertyForm.current.toggleModulePage();
     }
 }
 

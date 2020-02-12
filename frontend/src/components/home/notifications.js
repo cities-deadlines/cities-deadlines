@@ -12,7 +12,7 @@ class NotificationsList extends Component {
                 style={{
                     display: 'flex',
                     height: '100%',
-                    width: '80%',
+                    width: '85%',
                     flexDirection: 'column',
                     borderColor: 'gray',
                     borderWidth: '1px',
@@ -35,11 +35,11 @@ class NotificationsList extends Component {
                         borderTopLeftRadius: '10px',
                         borderTopRightRadius: '10px',
                         borderBottomColor: 'gray',
-                        borderBottomWidth: '2px',
+                        borderBottomWidth: '1px',
                         borderBottomStyle: 'solid',
                     }}
                 >   
-                    <b>Recent Notifications</b>
+                    <b>Recent Transactions</b>
                 </div>
 
                 <div style={{
@@ -76,7 +76,7 @@ class NotificationEntry extends Component {
             hover: false
         }
 
-        // bind class functions
+        // bind external functions
         this.onHover = this.onHover.bind(this);
         this.offHover = this.offHover.bind(this);
     }
