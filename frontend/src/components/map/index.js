@@ -35,96 +35,96 @@ class MapModule extends Component {
         else if (type == "tripletowers1") { return tripletowers1; }
     }
 
+    drawBuildingBlock(row, col, type, layer) {
+        var imageObj = new window.Image();
+        imageObj.src = this.selectAsset(type);
+        imageObj.onload = function() {
+            var skyscraperModel = new Konva.Rect({
+                x: BLOCK_WIDTH * (col / 2),
+                y: BLOCK_WIDTH * (row / 2),
+                height: BUILDING_WIDTH,
+                width: BUILDING_WIDTH,
+                fillPatternImage: imageObj,
+                fillPatternScaleX: 2,
+                fillPatternScaleY: 2
+            });
+            layer.add(skyscraperModel);
+            layer.getContext()._context.imageSmoothingEnabled = false;
+            layer.draw();
+        };
+    }
+
+    drawVerticalRoadBlock(row, col, type, layer) {
+        var imageObj = new window.Image();
+        imageObj.src = road;
+        imageObj.onload = function() {
+            var vertRoadModel = new Konva.Rect({
+                x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
+                y: BLOCK_WIDTH * (row / 2),
+                width: ROAD_WIDTH,
+                height: BUILDING_WIDTH,
+                fillPatternImage: imageObj,
+                fillPatternScaleX: 2,
+                fillPatternScaleY: 2,
+                fillPatternRotation: 90
+            });
+            layer.add(vertRoadModel);
+            var ctx = layer.getContext()._context;
+            ctx.imageSmoothingEnabled = false;
+            layer.draw();
+        };
+    }
+
+    drawHorizontalRoadBlock(row, col, type, layer) {
+        var imageObj = new window.Image();
+        imageObj.src = road;
+        imageObj.onload = function() {
+            var vertRoadModel = new Konva.Rect({
+                x: BLOCK_WIDTH * (col / 2),
+                y: BLOCK_WIDTH * (Math.floor((row / 2)) + 1) - ROAD_WIDTH,
+                width: BUILDING_WIDTH,
+                height: ROAD_WIDTH,
+                fillPatternImage: imageObj,
+                fillPatternScaleX: 2,
+                fillPatternScaleY: 2
+            });
+            layer.add(vertRoadModel);
+            var ctx = layer.getContext()._context;
+            ctx.imageSmoothingEnabled = false;
+            layer.draw();
+        };
+    }
+
+    drawIntersectionRoadBlock(row, col, type, layer) {
+        var imageObj = new window.Image();
+        imageObj.src = intersection;
+        imageObj.onload = function() {
+            var vertRoadModel = new Konva.Rect({
+                x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
+                y: BLOCK_WIDTH * (Math.floor((row / 2)) + 1) - ROAD_WIDTH,
+                width: ROAD_WIDTH,
+                height: ROAD_WIDTH,
+                fillPatternImage: imageObj,
+                fillPatternScaleX: 2,
+                fillPatternScaleY: 2,
+                fillPatternRotation: Math.floor(Math.random() * 4) * 90
+            });
+            layer.add(vertRoadModel);
+            var ctx = layer.getContext()._context;
+            ctx.imageSmoothingEnabled = false;
+            layer.draw();
+        };
+    }
+
     drawAsset(row, col, type, layer) {
-        // how many cases do we have here?
-        // we have the building case, which is if both indexes are even
-
-        // draw a skyscraper
         if (row % 2 == 0 && col % 2 == 0) {
-            var imageObj = new window.Image();
-            imageObj.src = this.selectAsset(type);
-            imageObj.onload = function() {
-                var skyscraperModel = new Konva.Rect({
-                    x: BLOCK_WIDTH * (col / 2),
-                    y: BLOCK_WIDTH * (row / 2),
-                    height: BUILDING_WIDTH,
-                    width: BUILDING_WIDTH,
-                    fillPatternImage: imageObj,
-                    fillPatternScaleX: 2,
-                    fillPatternScaleY: 2
-                });
-                layer.add(skyscraperModel);
-                layer.getContext()._context.imageSmoothingEnabled = false;
-                layer.draw();
-            };
-        }
-
-        // draw a vertical road/building filler block
-        else if (row % 2 == 0 && col % 2 != 0) {
-
-            var imageObj = new window.Image();
-            imageObj.src = road;
-            imageObj.onload = function() {
-                var vertRoadModel = new Konva.Rect({
-                    x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
-                    y: BLOCK_WIDTH * (row / 2),
-                    width: ROAD_WIDTH,
-                    height: BUILDING_WIDTH,
-                    fillPatternImage: imageObj,
-                    fillPatternScaleX: 2,
-                    fillPatternScaleY: 2,
-                    fillPatternRotation: 90
-                });
-                layer.add(vertRoadModel);
-                var ctx = layer.getContext()._context;
-                ctx.imageSmoothingEnabled = false;
-                layer.draw();
-            };
-        }
-
-        // draw a horizontal road/building filler block
-        else if (row % 2 != 0 && col % 2 == 0) {
-
-            var imageObj = new window.Image();
-            imageObj.src = road;
-            imageObj.onload = function() {
-                var vertRoadModel = new Konva.Rect({
-                    x: BLOCK_WIDTH * (col / 2),
-                    y: BLOCK_WIDTH * (Math.floor((row / 2)) + 1) - ROAD_WIDTH,
-                    width: BUILDING_WIDTH,
-                    height: ROAD_WIDTH,
-                    fillPatternImage: imageObj,
-                    fillPatternScaleX: 2,
-                    fillPatternScaleY: 2
-                });
-                layer.add(vertRoadModel);
-                var ctx = layer.getContext()._context;
-                ctx.imageSmoothingEnabled = false;
-                layer.draw();
-            };
-        }
-
-        // draw a central road/building filler block
-        else if (row % 2 != 0 && col % 2 != 0) {
-            console.log("Creating central roading block");
-            var imageObj = new window.Image();
-            imageObj.src = intersection;
-            imageObj.onload = function() {
-                var vertRoadModel = new Konva.Rect({
-                    x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
-                    y: BLOCK_WIDTH * (Math.floor((row / 2)) + 1) - ROAD_WIDTH,
-                    width: ROAD_WIDTH,
-                    height: ROAD_WIDTH,
-                    fillPatternImage: imageObj,
-                    fillPatternScaleX: 2,
-                    fillPatternScaleY: 2,
-                    fillPatternRotation: Math.floor(Math.random() * 4) * 90
-                });
-                layer.add(vertRoadModel);
-                var ctx = layer.getContext()._context;
-                ctx.imageSmoothingEnabled = false;
-                layer.draw();
-            };
+            this.drawBuildingBlock(row, col, type, layer);
+        } else if (row % 2 == 0 && col % 2 != 0) {
+            this.drawVerticalRoadBlock(row, col, type, layer);            
+        } else if (row % 2 != 0 && col % 2 == 0) {
+            this.drawHorizontalRoadBlock(row, col, type, layer);
+        } else {
+            this.drawIntersectionRoadBlock(row, col, type, layer);
         }
     }
 
