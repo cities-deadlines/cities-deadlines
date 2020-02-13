@@ -19,6 +19,50 @@ class MainForm extends Component {
         return (
             <>
 
+                {/* page banner */}
+                <div 
+                    style={{
+                        position: 'absolute',
+                        display: 'flex',
+                        top: '0',
+
+                        justifyContent: 'center',
+                        alignItems: 'center',
+
+                        width: '100%',
+                        height: '7%',
+
+                        backgroundColor: 'black'
+                    }}
+                > 
+                    <div 
+                        style={{ 
+                            color: 'white',
+                            fontWeight: 'bolder',
+                            fontSize: '19px'
+                        }}
+                    >
+                        Home
+                    </div>
+
+                    {/* sign out button */}
+                    <Button
+                        variant='dark'
+                        type='button'
+                        size='sm'
+                        style={{ 
+                            position: 'absolute',
+                            right: '15px',
+                            borderColor: 'white',
+                            backgroundColor: 'black'
+                        }}
+                        
+                        onClick={this.signOut}
+                    >
+                        Sign Out
+                    </Button>
+                </div>
+
                 {/* balance display */}
                 <div 
                     style={{
@@ -112,30 +156,12 @@ class MainForm extends Component {
                         top: '40%',
                         display: 'flex',
                         width: '100%',
-                        height: '50%',
+                        height: '57%',
                         justifyContent: 'center',
                     }}
                 >
                     <NotificationsList />
                 </div>
-
-                {/* sign out button */}
-                <Button
-                    variant='dark'
-                    type='button'
-                    size='sm'
-                    style={{ 
-                        position: 'absolute',
-                        bottom: '3%',
-                        marginTop: '30px',
-                        borderColor: 'black',
-                        backgroundColor: 'black'
-                    }}
-                    
-                    onClick={this.signOut}
-                >
-                    Sign Out
-                </Button>
             </>
         );
     }

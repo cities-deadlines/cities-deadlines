@@ -13,9 +13,6 @@ import LogoIcon from '../../../img/logo-2.png';
 class UserModule extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            currentPage: 'Login'
-        }
 
         // create refs for user forms
         this.registerForm = React.createRef();
@@ -27,31 +24,6 @@ class UserModule extends Component {
     render() {
         return (
             <RightModule>
-
-                {/* page banner */}
-                <div style={{
-                    display: 'flex',
-                    position: 'absolute',
-                    zIndex: 1,
-
-                    justifyContent: 'center',
-                    alignItems: 'center',
-
-                    width: '100%',
-                    height: '7%',
-
-                    backgroundColor: 'black'
-                }}> 
-                    <div 
-                        style={{ 
-                            color: 'white',
-                            fontWeight: 'bolder',
-                            fontSize: '22px'
-                        }}
-                    >
-                        {this.state.currentPage}
-                    </div>
-                </div>
 
                 {/* login page */}
                 <RightModulePage visible={true}>
@@ -103,14 +75,7 @@ class UserModule extends Component {
     } 
 
     switchPage() {
-        if (this.state.currentPage == 'Login') {
-            this.registerForm.current.toggleModulePage();
-            this.setState({ currentPage: 'Register' });
-        }
-        else if (this.state.currentPage == 'Register') {
-            this.registerForm.current.toggleModulePage();
-            this.setState({ currentPage: 'Login' });
-        }   
+        this.registerForm.current.toggleModulePage(); 
     }
 }
 

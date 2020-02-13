@@ -31,31 +31,6 @@ class HomeModule extends Component {
         return (
             <RightModule>
 
-                {/* page banner */}
-                <div style={{
-                    display: 'flex',
-                    position: 'absolute',
-                    zIndex: 1,
-
-                    justifyContent: 'center',
-                    alignItems: 'center',
-
-                    width: '100%',
-                    height: '7%',
-
-                    backgroundColor: 'black'
-                }}> 
-                    <div 
-                        style={{ 
-                            color: 'white',
-                            fontWeight: 'bolder',
-                            fontSize: '22px'
-                        }}
-                    >
-                        {this.state.currentPage}
-                    </div>
-                </div>
-
                 {/* main page */}
                 <RightModulePage visible={true}>
 

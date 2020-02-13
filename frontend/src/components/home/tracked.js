@@ -1,20 +1,86 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import { trackPromise } from 'react-promise-tracker';
 
 class TrackedForm extends Component {
     constructor(props) {
         super(props);
+
+        // bind external functions
+        this.signOut = this.signOut.bind(this);
     }
 
     render() {
         return (
             <>
+
+                {/* page banner */}
+                <div 
+                    style={{
+                        display: 'flex',
+                        position: 'absolute',
+                        top: '0',
+
+                        justifyContent: 'center',
+                        alignItems: 'center',
+
+                        width: '100%',
+                        height: '7%',
+
+                        backgroundColor: 'black'
+                    }}
+                > 
+                    <div 
+                        style={{ 
+                            color: 'white',
+                            fontWeight: 'bolder',
+                            fontSize: '19px'
+                        }}
+                    >
+                        Tracked Properties
+                    </div>
+
+                    {/* sign out button */}
+                    <Button
+                        variant='dark'
+                        type='button'
+                        size='sm'
+                        style={{ 
+                            position: 'absolute',
+                            right: '15px',
+                            borderColor: 'white',
+                            backgroundColor: 'black'
+                        }}
+                        
+                        onClick={this.signOut}
+                    >
+                        Sign Out
+                    </Button>
+
+                    {/* back button */}
+                    <Button
+                        variant='dark'
+                        type='button'
+                        size='sm'
+                        style={{ 
+                            position: 'absolute',
+                            left: '15px',
+                            borderColor: 'white',
+                            backgroundColor: 'black'
+                        }}
+                        
+                        onClick={this.props.closeTrackedPage}
+                    >
+                        Back
+                    </Button>
+                </div>
+
                 <div
                     style={{
                         position: 'absolute',
                         display: 'flex',
                         top: '7%',
-                        height: '83.5%',
+                        height: '93%',
                         width: '100%',
                         flexDirection: 'column',
                         overflowY: 'hidden',
@@ -39,26 +105,18 @@ class TrackedForm extends Component {
 
                     </div>
                 </div>
-
-                {/* back button */}
-                <Button
-                    variant='dark'
-                    type='button'
-                    size='sm'
-                    style={{ 
-                        position: 'absolute',
-                        bottom: '3%',
-                        marginTop: '30px',
-                        borderColor: 'black',
-                        backgroundColor: 'black'
-                    }}
-                    
-                    onClick={this.props.closeTrackedPage}
-                >
-                    Back
-                </Button>
             </>
         )
+    }
+
+    signOut() {
+        trackPromise(
+            this.props.context.GET('user/signout/', {})
+            .then((data) => {
+                this.props.context.updateUser(null);
+            })
+            .catch((err) => {})
+        );
     }
 }
 

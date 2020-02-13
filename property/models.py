@@ -15,22 +15,14 @@ class Property(models.Model):
         skyscraper2 = 'skyscraper2'
         tripletowers1 = 'tripletowers1'
 
-    # current value - we should keep all currency in integer amounts, to stop overflow issues with percentages
-    # default is the initial price to purchase property lot
     value = models.IntegerField(_('property value'), default=10) 
+    buildingType = models.CharField(_('building type'), max_length=100, choices=BuildingTypes.choices)
 
     # set these fields on property update
-    # defaults are the initial property tier of 1 and initial rating of 0
     tier = models.IntegerField(_('property tier'), default=1)
     rating = models.IntegerField(_('property rating'), default=0)
 
-    # allow only the specific building types as defined above
-    buildingType = models.CharField(_('building type'), max_length=100, choices=BuildingTypes.choices)
-    
-    # need some way to store purchase history here; realistically, a purchase history is probably going to
-    # be its own data structure?
-
-    # instantiate the many-to-one relationship between users and buildings (a user can own multiple buildings)
+    # relation fields
     owner = models.ForeignKey(
         User, 
         on_delete=models.SET_NULL, # set owning user to NULL when user is deleted
@@ -47,6 +39,7 @@ class PropertyTransaction(models.Model):
 
     amount = models.IntegerField(_('transaction amount'))
 
+    # relation fields
     buyer = models.ForeignKey(
         User, 
         on_delete=models.SET_NULL, # set buying user to NULL when user is deleted
@@ -64,5 +57,4 @@ class PropertyTransaction(models.Model):
     target_property = models.ForeignKey(
         Property,
         on_delete=models.CASCADE # delete property transaction when property is deleted
-
     ) 
