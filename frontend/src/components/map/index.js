@@ -190,7 +190,7 @@ class MapModule extends Component {
         }.bind(this), false);
 
         (async () => {
-            await this.populateMap();
+            this.populateMap();
         })();
     }
 }
