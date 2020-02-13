@@ -29,121 +29,150 @@ class RegisterForm extends Component {
 
     render() {
         return (
-            <Form style={{
-                width: '60%',
-                marginTop: '175px'
-            }}>
+            <>
 
-                {/* display form error message */}
-                {this.state.errorMessage && (
-                    <Form.Group 
-                        className='text-danger'
+                {/* page banner */}
+                <div style={{
+                    display: 'flex',
+                    position: 'absolute',
+                    top: '0',
+
+                    justifyContent: 'center',
+                    alignItems: 'center',
+
+                    width: '100%',
+                    height: '7%',
+
+                    backgroundColor: 'black'
+                }}> 
+                    <div 
                         style={{ 
-                            marginTop: '35px', 
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
+                            color: 'white',
+                            fontWeight: 'bolder',
+                            fontSize: '22px'
                         }}
                     >
-                        <Form.Text>
-                            {this.state.errorMessage}
-                        </Form.Text>
+                        Register
+                    </div>
+                </div>
+
+                {/* register form */}
+                <Form style={{
+                    width: '60%',
+                    marginTop: '175px'
+                }}>
+
+                    {/* display form error message */}
+                    {this.state.errorMessage && (
+                        <Form.Group 
+                            className='text-danger'
+                            style={{ 
+                                marginTop: '35px', 
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Form.Text>
+                                {this.state.errorMessage}
+                            </Form.Text>
+                        </Form.Group>
+                    )}
+
+                    <Form.Group>
+                        <Form.Control 
+                            type='email' 
+                            placeholder='Email' 
+                            style={{ borderRadius: '1rem', borderColor: 'grey' }}
+                            isValid={this.state.validEmail}
+                            isInvalid={this.state.invalidEmail}
+
+                            maxLength={32}
+                            value={this.state.email}
+                            onChange={this.updateEmail}
+                            onKeyPress={this.handleKeyPress}
+                        />
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
+                            Invalid email.
+                        </Form.Control.Feedback>
                     </Form.Group>
-                )}
 
-                <Form.Group>
-                    <Form.Control 
-                        type='email' 
-                        placeholder='Email' 
-                        style={{ borderRadius: '1rem', borderColor: 'grey' }}
-                        isValid={this.state.validEmail}
-                        isInvalid={this.state.invalidEmail}
+                    <Form.Group>
+                        <Form.Control
+                            type='username' 
+                            placeholder='Username' 
+                            style={{ borderRadius: '1rem', borderColor: 'grey' }}
+                            isValid={this.state.validUsername}
+                            isInvalid={this.state.invalidUsername}
 
-                        maxLength={32}
-                        value={this.state.email}
-                        onChange={this.updateEmail}
-                        onKeyPress={this.handleKeyPress}
-                    />
-                    <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
-                        Invalid email.
-                    </Form.Control.Feedback>
-                </Form.Group>
+                            maxLength={15}
+                            value={this.state.username}
+                            onChange={this.updateUsername}
+                            onKeyPress={this.handleKeyPress}
+                        />
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
+                            Invalid username (at least 3 characters).
+                        </Form.Control.Feedback>
+                    </Form.Group>
 
-                <Form.Group>
-                    <Form.Control
-                        type='username' 
-                        placeholder='Username' 
-                        style={{ borderRadius: '1rem', borderColor: 'grey' }}
-                        isValid={this.state.validUsername}
-                        isInvalid={this.state.invalidUsername}
+                    <Form.Group>
+                        <Form.Control 
+                            type='password' 
+                            placeholder='Password' 
+                            style={{ borderRadius: '1rem', borderColor: 'grey' }}
+                            autoComplete='off'
+                            isValid={this.state.validPassword}
+                            isInvalid={this.state.invalidPassword}
 
-                        maxLength={15}
-                        value={this.state.username}
-                        onChange={this.updateUsername}
-                        onKeyPress={this.handleKeyPress}
-                    />
-                    <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
-                        Invalid username (at least 3 characters).
-                    </Form.Control.Feedback>
-                </Form.Group>
+                            maxLength={64}
+                            value={this.state.password}
+                            onChange={this.updatePassword}
+                            onKeyPress={this.handleKeyPress}
+                        />
+                        <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
+                            Invalid password (at least 8 characters with one number and special character).
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    
+                    <Form.Group style={{ marginTop: '35px' }}>
+                        <Button
+                            variant='dark' 
+                            type='button'
+                            style={{
+                                borderRadius: '1rem',
+                                fontWeight: 'bold',
+                                float: 'left',
+                                fontSize: '14px',
+                                width: '42%',
+                                borderColor: 'black',
+                                backgroundColor: 'black'
+                            }}
 
-                <Form.Group>
-                    <Form.Control 
-                        type='password' 
-                        placeholder='Password' 
-                        style={{ borderRadius: '1rem', borderColor: 'grey' }}
-                        autoComplete='off'
-                        isValid={this.state.validPassword}
-                        isInvalid={this.state.invalidPassword}
+                            onClick={this.submitForm}
+                        >
+                            Submit
+                        </Button>
 
-                        maxLength={64}
-                        value={this.state.password}
-                        onChange={this.updatePassword}
-                        onKeyPress={this.handleKeyPress}
-                    />
-                    <Form.Control.Feedback type='invalid' style={{ fontSize: '11px' }}>
-                        Invalid password (at least 8 characters with one number and special character).
-                    </Form.Control.Feedback>
-                </Form.Group>
-                
-                <Form.Group style={{ marginTop: '35px' }}>
-                    <Button
-                        variant='dark' 
-                        type='button'
-                        style={{
-                            borderRadius: '1rem',
-                            fontWeight: 'bold',
-                            float: 'left',
-                            fontSize: '14px',
-                            width: '42%',
-                            borderColor: 'black',
-                            backgroundColor: 'black'
-                        }}
+                        <Button
+                            variant='dark' 
+                            type='button'
+                            style={{
+                                borderRadius: '1rem',
+                                fontWeight: 'bold',
+                                float: 'right',
+                                fontSize: '14px',
+                                width: '42%',
+                                borderColor: 'black',
+                                backgroundColor: 'black'
+                            }}
 
-                        onClick={this.submitForm}
-                    >
-                        Submit
-                    </Button>
-
-                    <Button
-                        variant='dark' 
-                        type='button'
-                        style={{
-                            borderRadius: '1rem',
-                            fontWeight: 'bold',
-                            float: 'right',
-                            fontSize: '14px',
-                            width: '42%',
-                            borderColor: 'black',
-                            backgroundColor: 'black'
-                        }}
-
-                        onClick={this.props.switchPage}
-                    >
-                        Back
-                    </Button>
-                </Form.Group>
-            </Form>
+                            onClick={this.props.switchPage}
+                        >
+                            Back
+                        </Button>
+                    </Form.Group>
+                </Form>
+            </>
         );
     }
 

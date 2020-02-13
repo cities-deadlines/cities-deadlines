@@ -12,7 +12,7 @@ class NotificationsList extends Component {
                 style={{
                     display: 'flex',
                     height: '100%',
-                    width: '80%',
+                    width: '85%',
                     flexDirection: 'column',
                     borderColor: 'gray',
                     borderWidth: '1px',

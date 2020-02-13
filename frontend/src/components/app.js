@@ -55,15 +55,18 @@ class App extends Component {
             <UserContext.Provider value={context}>
 
                 {/* module frame (page) */}
-                <div id='module-frame' style={{
-                    position: 'absolute',
-                    top: '0',
-                    left: '0',
-                    width: '100%',
-                    height: '100%',
-                    overflow: 'hidden',
-                    fontFamily: 'Arial, Helvetica, sans-serif'
-                }}>
+                <div id='module-frame' 
+                    style={{
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%',
+                        overflow: 'hidden',
+                        fontFamily: 'Arial, Helvetica, sans-serif',
+                        backgroundColor: '#f2f2f2'
+                    }}
+                >
                     
 
                     {/* right module frame */}
