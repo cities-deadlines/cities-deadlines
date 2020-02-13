@@ -1,5 +1,4 @@
 from django.apps import AppConfig
 
-
-class PropertiesConfig(AppConfig):
-    name = 'properties'
+class PropertyConfig(AppConfig):
+    name = 'property'

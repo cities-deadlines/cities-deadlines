@@ -26,7 +26,9 @@ INSTALLED_APPS = [
     'rest_framework',
     
     'frontend.apps.FrontendConfig', # connect react frontend app
-    'user.apps.UserConfig', # connect user api api
+    'user.apps.UserConfig', # connect user api
+    'property.apps.PropertyConfig', # connect property api
+    'map.apps.MapConfig' # connect map api
 ]
 
 MIDDLEWARE = [

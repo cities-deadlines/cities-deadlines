@@ -58,3 +58,5 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(models.User, UserAdmin)
 admin.site.unregister(Group)
             
+# set admin site header
+admin.site.site_header = 'Cities Deadlines Administration'
