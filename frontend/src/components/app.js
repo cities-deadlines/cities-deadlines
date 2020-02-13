@@ -68,17 +68,6 @@ class App extends Component {
                     }}
                 >
                     
-                    {/* left module frame */}
-                    <div id='left-module-frame' style={{
-                        position: 'absolute',
-                        left: '0',
-                        width: '75%',
-                        height: '100%'
-                    }}>
-
-                        <MapModule />
-
-                    </div>
 
                     {/* right module frame */}
                     <div id='right-module-frame' style={{
@@ -95,6 +84,21 @@ class App extends Component {
                         )}
 
                     </div>
+
+                    
+                    {/* left module frame */}
+                    <div id='left-module-frame' style={{
+                        position: 'absolute',
+                        left: '0',
+                        width: '75%',
+                        height: '100%'
+                    }}>
+
+                        <MapModule />
+
+                    </div>
+
+                    
                 </div>
             </UserContext.Provider>
         );

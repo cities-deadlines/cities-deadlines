@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Konva from 'konva';
-import { Image } from 'react-bootstrap';
+import { trackPromise } from 'react-promise-tracker';
 
 import 'babel-polyfill';
 
@@ -189,9 +189,9 @@ class MapModule extends Component {
             ctx.imageSmoothingEnabled = false;
         }.bind(this), false);
 
-        (async () => {
-            await this.populateMap();
-        })();
+        trackPromise((async () => {
+            this.populateMap();
+        })());
     }
 }
 
