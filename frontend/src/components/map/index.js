@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Konva from 'konva';
 import { Image } from 'react-bootstrap';
 
+import 'babel-polyfill';
+
 const BUILDING_WIDTH = 160;
 const ROAD_WIDTH = BUILDING_WIDTH / 4;
 const BLOCK_WIDTH = BUILDING_WIDTH + ROAD_WIDTH;
@@ -155,7 +157,7 @@ class MapModule extends Component {
 
         var ctx = this.cityLayer.getContext()._context;
         ctx.imageSmoothingEnabled = false;
-
+        
         var i = 0;
         for (i = 0; i < map.length; i++) {
             var j = 0;
@@ -165,6 +167,7 @@ class MapModule extends Component {
         }
 
         this.cityLayer.draw();
+        return "Population complete";
     }
 
     componentDidMount() {
@@ -186,7 +189,9 @@ class MapModule extends Component {
             ctx.imageSmoothingEnabled = false;
         }.bind(this), false);
 
-        this.populateMap();
+        (async () => {
+            await this.populateMap();
+        })();
     }
 }
 
