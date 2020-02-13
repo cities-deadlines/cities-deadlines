@@ -45,15 +45,15 @@ class HomeModule extends Component {
 
                     backgroundColor: 'black'
                 }}> 
-                    <h4 
+                    <div 
                         style={{ 
                             color: 'white',
-                            marginTop: '2%',
-                            fontWeight: 'bolder'
+                            fontWeight: 'bolder',
+                            fontSize: '22px'
                         }}
                     >
                         {this.state.currentPage}
-                    </h4>
+                    </div>
                 </div>
 
                 {/* main page */}

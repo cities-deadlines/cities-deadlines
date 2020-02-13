@@ -3,7 +3,7 @@ from map.models import MapTile
 from user.models import User
 
 # Create your models here.
-class Building(models.Model):
+class Property(models.Model):
 
     class BuildingTypes(models.TextChoices):
         skyscraper1 = "skyscraper1"

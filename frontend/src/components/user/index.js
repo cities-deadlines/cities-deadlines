@@ -8,7 +8,7 @@ import {
     RightModule
 } from '../modules/right-module';
 
-import LogoIcon from './../../icons/logo-2.png';
+import LogoIcon from '../../../img/logo-2.png';
 
 class UserModule extends Component {
     constructor(props) {
@@ -42,15 +42,15 @@ class UserModule extends Component {
 
                     backgroundColor: 'black'
                 }}> 
-                    <h4 
+                    <div 
                         style={{ 
                             color: 'white',
-                            marginTop: '2%',
-                            fontWeight: 'bolder'
+                            fontWeight: 'bolder',
+                            fontSize: '22px'
                         }}
                     >
                         {this.state.currentPage}
-                    </h4>
+                    </div>
                 </div>
 
                 {/* login page */}
