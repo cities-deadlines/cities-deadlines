@@ -33,7 +33,7 @@ class OwnedForm extends Component {
                         
                         <OwnedPropertyEntry property={{ tier: 5, name: 'Alex\'s First Property', value: '$5' }} />
                         <OwnedPropertyEntry property={{ tier: 5, name: 'Alex\'s Second Property', value: '$20' }} />
-                        <OwnedPropertyEntry property={{ tier: 5, name: 'Alex\'s Third Property', value: '$1,000,000' }} />
+                        <OwnedPropertyEntry property={{ tier: 5, name: 'Harry\'s Third Property', value: '$1,000,000' }} />
 
                     </div>
                 </div>
