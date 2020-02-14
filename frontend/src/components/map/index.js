@@ -189,9 +189,7 @@ class MapModule extends Component {
             ctx.imageSmoothingEnabled = false;
         }.bind(this), false);
 
-        trackPromise((async () => {
-            this.populateMap();
-        })());
+        this.populateMap();
     }
 }
 

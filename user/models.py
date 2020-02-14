@@ -87,16 +87,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # model metadata
     class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+        verbose_name = _('User')
+        verbose_name_plural = _('Users')
 
     # base user fields
-    username = models.CharField(_('username'), max_length=15, unique=True)
-    email = models.EmailField(_('email address'), unique=True)
-    is_staff = models.BooleanField(_('staff status'), default=False)
-    is_active = models.BooleanField(_('active'), default=True)
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-
+    id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    username = models.CharField(_('Username'), max_length=15, unique=True)
+    email = models.EmailField(_('Email Address'), unique=True)
+    is_active = models.BooleanField(_('Active'), default=True)
+    date_joined = models.DateTimeField(_('Date Joined'), default=timezone.now)
+    is_staff = models.BooleanField(_('Staff Status'), default=False)
+    
     # required fields (for django)
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'

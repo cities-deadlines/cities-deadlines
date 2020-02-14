@@ -8,7 +8,7 @@ import {
     RightModule
 } from '../modules/right-module';
 
-import LogoIcon from '../../../img/logo-2.png';
+import LogoIcon from '../../icons/logo-2.png';
 
 class UserModule extends Component {
     constructor(props) {

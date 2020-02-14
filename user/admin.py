@@ -4,11 +4,12 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
 from . import models
+from property.models import Property, PropertyTransaction
 
 class UserAdmin(BaseUserAdmin):
 
-    list_display = ('username', 'email', 'date_joined', 'last_login', 'is_active', 'is_superuser')
-    list_filter = ('is_superuser', 'is_active', 'date_joined')
+    list_display = ['id', 'username', 'email', 'date_joined', 'last_login', 'is_active', 'is_staff', 'is_superuser']
+    list_filter = ['date_joined', 'is_active', 'is_staff', 'is_superuser']
 
     fieldsets = (
         (
@@ -17,9 +18,7 @@ class UserAdmin(BaseUserAdmin):
                 'fields': (
                     'username', 
                     'email', 
-                    'is_active',
-                    'date_joined',
-                    'last_login'
+                    'is_active'
                 )
             }
         ),
@@ -27,8 +26,8 @@ class UserAdmin(BaseUserAdmin):
             'Permissions', 
             {
                 'fields': (
-                    'is_superuser',
-                    'is_staff'
+                    'is_staff',
+                    'is_superuser'
                 )
             }
         )
@@ -38,9 +37,6 @@ class UserAdmin(BaseUserAdmin):
         (
             None, 
             {
-                'classes': (
-                    'wide',
-                ),
                 'fields': (
                     'email', 
                     'username', 
@@ -50,13 +46,12 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
 
-    search_fields = ('username', 'email')
+    search_fields = ('id', 'username', 'email')
     ordering = ('username', 'email')
-    filter_horizontal = ()
+
+# set admin site header
+admin.site.site_header = 'Cities Deadlines Administration'
 
 # register admin/user
 admin.site.register(models.User, UserAdmin)
 admin.site.unregister(Group)
-            
-# set admin site header
-admin.site.site_header = 'Cities Deadlines Administration'

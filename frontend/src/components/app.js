@@ -25,20 +25,17 @@ class App extends Component {
     componentDidMount() {
 
         // fetch current user
-        const promise = this.GET('user/current/', {})
-            .then((data) => {
-                this.updateUser({
-                    id: data.id,
-                    username: data.username,
-                    email: data.email
-                });
-            })
-            .catch((err) => {});
-        
-        // track promise after delay
-        setTimeout(() => {
-            trackPromise(promise);
-        }, 50);
+        trackPromise(
+            this.GET('user/current/', {})
+                .then((data) => {
+                    this.updateUser({
+                        id: data.id,
+                        username: data.username,
+                        email: data.email
+                    });
+                })
+                .catch((err) => {})
+        );
     }
 
     render() {
@@ -68,6 +65,17 @@ class App extends Component {
                     }}
                 >
                     
+                    {/* left module frame */}
+                    <div id='left-module-frame' style={{
+                        position: 'absolute',
+                        left: '0',
+                        width: '75%',
+                        height: '100%'
+                    }}>
+
+                        <MapModule />
+
+                    </div>
 
                     {/* right module frame */}
                     <div id='right-module-frame' style={{
@@ -84,20 +92,6 @@ class App extends Component {
                         )}
 
                     </div>
-
-                    
-                    {/* left module frame */}
-                    <div id='left-module-frame' style={{
-                        position: 'absolute',
-                        left: '0',
-                        width: '75%',
-                        height: '100%'
-                    }}>
-
-                        <MapModule />
-
-                    </div>
-
                     
                 </div>
             </UserContext.Provider>

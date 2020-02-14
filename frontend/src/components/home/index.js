@@ -7,7 +7,6 @@ import {
 import MainForm from './main';
 import OwnedForm from './owned';
 import TrackedForm from './tracked';
-
 class HomeModule extends Component {
     constructor(props) {
         super(props);
