@@ -1,21 +1,11 @@
 import React, { Component } from "react";
 import Konva from 'konva';
-import { trackPromise } from 'react-promise-tracker';
-
+import * as AssetManager from './assetmanager'
 import 'babel-polyfill';
 
 const BUILDING_WIDTH = 160;
 const ROAD_WIDTH = BUILDING_WIDTH / 4;
 const BLOCK_WIDTH = BUILDING_WIDTH + ROAD_WIDTH;
-
-// import relevant assets
-import intersection from '../../../img/4-way-intersection-city-dense.png';
-import road from '../../../img/4-lane-road-city-dense.png';
-import skyscraper1 from '../../../img/skyscraper-dense-parallax-1.png';
-import tripletowers1 from '../../../img/triple-towers-1.png';
-import watertile from '../../../img/water-full-block.png'
-import waterroad from '../../../img/water-road-block-middle.png'
-import waterinter from '../../../img/water-intersect-block-middle.png'
 
 class MapModule extends Component {
 
@@ -35,23 +25,9 @@ class MapModule extends Component {
         );
     }
 
-    selectAsset(type) {
-        if (type == "skyscraper1") {return skyscraper1;}
-        else if (type == "tripletowers1") { return tripletowers1; }
-        else if (type == "water") { return watertile; }
-    }
-
-    selectRoadAsset(type) {
-        return null;
-    }
-
-    selectIntersectAsset(type) {
-        return null;
-    }
-
     drawBuildingBlock(row, col, type, layer) {
         var imageObj = new window.Image();
-        imageObj.src = this.selectAsset(type);
+        imageObj.src = AssetManager.retrieveBlockAsset(type);
         imageObj.onload = function() {
             var skyscraperModel = new Konva.Rect({
                 x: BLOCK_WIDTH * (col / 2),
@@ -70,7 +46,7 @@ class MapModule extends Component {
 
     drawVerticalRoadBlock(row, col, type, layer) {
         var imageObj = new window.Image();
-        imageObj.src = this.selectRoadAsset(type, row, col);;
+        imageObj.src = AssetManager.retrieveRoadAsset('road');
         imageObj.onload = function() {
             var vertRoadModel = new Konva.Rect({
                 x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
@@ -91,7 +67,7 @@ class MapModule extends Component {
 
     drawHorizontalRoadBlock(row, col, type, layer) {
         var imageObj = new window.Image();
-        imageObj.src = road;
+        imageObj.src = AssetManager.retrieveRoadAsset('road');
         imageObj.onload = function() {
             var vertRoadModel = new Konva.Rect({
                 x: BLOCK_WIDTH * (col / 2),
@@ -111,7 +87,7 @@ class MapModule extends Component {
 
     drawIntersectionRoadBlock(row, col, type, layer) {
         var imageObj = new window.Image();
-        imageObj.src = intersection;
+        imageObj.src = AssetManager.retrieveIntersectionAsset('intersection');
         imageObj.onload = function() {
             var vertRoadModel = new Konva.Rect({
                 x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
