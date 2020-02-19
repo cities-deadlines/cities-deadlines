@@ -46,7 +46,8 @@ class MapModule extends Component {
 
     drawVerticalRoadBlock(row, col, type, layer) {
         var imageObj = new window.Image();
-        imageObj.src = AssetManager.retrieveRoadAsset('road');
+        // try and identify what angle the water border tiles need to be at, from the grid
+        imageObj.src = AssetManager.retrieveRoadAsset('road', 'north');
         imageObj.onload = function() {
             var vertRoadModel = new Konva.Rect({
                 x: BLOCK_WIDTH * (Math.floor((col / 2)) + 1) - ROAD_WIDTH,
@@ -128,7 +129,7 @@ class MapModule extends Component {
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road'],
                 ['skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road'],
-                ['skyscraper1', 'road', 'skyscraper1', 'road', 'water', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
+                ['skyscraper1', 'road', 'grass', 'road', 'water', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road'],
                 ['skyscraper1', 'road', 'skyscraper1', 'road', 'water', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road', 'skyscraper1', 'road'],
                 ['road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road', 'road'],

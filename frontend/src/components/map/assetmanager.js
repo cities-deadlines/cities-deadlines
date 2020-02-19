@@ -8,15 +8,20 @@ import tripletowers1 from '../../../img/triple-towers-1.png';
 import watertile from '../../../img/water-full-block.png'
 import waterroad from '../../../img/water-road-block-middle.png'
 import waterinter from '../../../img/water-intersect-block-middle.png'
+import grass from '../../../img/grass.png'
+import grassRoad from '../../../img/grass-road.png'
 
 
 export function retrieveBlockAsset(name) {
     if (name == "skyscraper1") {return skyscraper1;}
     else if (name == "tripletowers1") { return tripletowers1; }
     else if (name == "water") { return watertile; }
+    else return grass;
 }
 
-export function retrieveRoadAsset(name) {
+export function retrieveRoadAsset(name, direction) {
+    if (name == "waterroad") { return waterroad; }
+    if (name == "grass") { return grassRoad; }
     return road;
 }
 
